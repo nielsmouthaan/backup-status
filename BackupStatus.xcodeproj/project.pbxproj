@@ -7,22 +7,71 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B8475DFE2B0B6C25005FD99C /* Backup_StatusApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8475DFD2B0B6C25005FD99C /* Backup_StatusApp.swift */; };
+		B843A4692B0B6E1800BE2277 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B884DDDC2B0B6C6900EA00B3 /* WidgetKit.framework */; };
+		B843A46A2B0B6E1800BE2277 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B884DDDE2B0B6C6900EA00B3 /* SwiftUI.framework */; };
+		B843A46D2B0B6E1800BE2277 /* BackupStatusWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B843A46C2B0B6E1800BE2277 /* BackupStatusWidgetBundle.swift */; };
+		B843A46F2B0B6E1800BE2277 /* BackupStatusWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B843A46E2B0B6E1800BE2277 /* BackupStatusWidget.swift */; };
+		B843A4712B0B6E1800BE2277 /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B843A4702B0B6E1800BE2277 /* AppIntent.swift */; };
+		B843A4732B0B6E1900BE2277 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B843A4722B0B6E1900BE2277 /* Assets.xcassets */; };
+		B843A4782B0B6E1900BE2277 /* Backup Status Widget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B843A4682B0B6E1800BE2277 /* Backup Status Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B8475DFE2B0B6C25005FD99C /* BackupStatusApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8475DFD2B0B6C25005FD99C /* BackupStatusApp.swift */; };
 		B8475E002B0B6C25005FD99C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8475DFF2B0B6C25005FD99C /* ContentView.swift */; };
 		B8475E022B0B6C26005FD99C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8475E012B0B6C26005FD99C /* Assets.xcassets */; };
 		B8475E052B0B6C26005FD99C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8475E042B0B6C26005FD99C /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		B843A4762B0B6E1900BE2277 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B8475DF22B0B6C25005FD99C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B843A4672B0B6E1800BE2277;
+			remoteInfo = BackupStatusWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B884DDEE2B0B6C6A00EA00B3 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				B843A4782B0B6E1900BE2277 /* Backup Status Widget.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		B843A4682B0B6E1800BE2277 /* Backup Status Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Backup Status Widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B843A46C2B0B6E1800BE2277 /* BackupStatusWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupStatusWidgetBundle.swift; sourceTree = "<group>"; };
+		B843A46E2B0B6E1800BE2277 /* BackupStatusWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupStatusWidget.swift; sourceTree = "<group>"; };
+		B843A4702B0B6E1800BE2277 /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
+		B843A4722B0B6E1900BE2277 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B843A4742B0B6E1900BE2277 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B843A4752B0B6E1900BE2277 /* BackupStatusWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BackupStatusWidget.entitlements; sourceTree = "<group>"; };
 		B8475DFA2B0B6C25005FD99C /* Backup Status.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Backup Status.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B8475DFD2B0B6C25005FD99C /* Backup_StatusApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backup_StatusApp.swift; sourceTree = "<group>"; };
+		B8475DFD2B0B6C25005FD99C /* BackupStatusApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupStatusApp.swift; sourceTree = "<group>"; };
 		B8475DFF2B0B6C25005FD99C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B8475E012B0B6C26005FD99C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B8475E042B0B6C26005FD99C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		B8475E062B0B6C26005FD99C /* Backup_Status.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Backup_Status.entitlements; sourceTree = "<group>"; };
+		B8475E062B0B6C26005FD99C /* BackupStatus.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BackupStatus.entitlements; sourceTree = "<group>"; };
+		B884DDDC2B0B6C6900EA00B3 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		B884DDDE2B0B6C6900EA00B3 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		B843A4652B0B6E1800BE2277 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B843A46A2B0B6E1800BE2277 /* SwiftUI.framework in Frameworks */,
+				B843A4692B0B6E1800BE2277 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B8475DF72B0B6C25005FD99C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -33,10 +82,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B843A46B2B0B6E1800BE2277 /* BackupStatusWidget */ = {
+			isa = PBXGroup;
+			children = (
+				B843A46C2B0B6E1800BE2277 /* BackupStatusWidgetBundle.swift */,
+				B843A46E2B0B6E1800BE2277 /* BackupStatusWidget.swift */,
+				B843A4702B0B6E1800BE2277 /* AppIntent.swift */,
+				B843A4722B0B6E1900BE2277 /* Assets.xcassets */,
+				B843A4742B0B6E1900BE2277 /* Info.plist */,
+				B843A4752B0B6E1900BE2277 /* BackupStatusWidget.entitlements */,
+			);
+			path = BackupStatusWidget;
+			sourceTree = "<group>";
+		};
 		B8475DF12B0B6C25005FD99C = {
 			isa = PBXGroup;
 			children = (
-				B8475DFC2B0B6C25005FD99C /* Backup Status */,
+				B8475DFC2B0B6C25005FD99C /* BackupStatus */,
+				B843A46B2B0B6E1800BE2277 /* BackupStatusWidget */,
+				B884DDDB2B0B6C6900EA00B3 /* Frameworks */,
 				B8475DFB2B0B6C25005FD99C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -45,20 +109,21 @@
 			isa = PBXGroup;
 			children = (
 				B8475DFA2B0B6C25005FD99C /* Backup Status.app */,
+				B843A4682B0B6E1800BE2277 /* Backup Status Widget.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B8475DFC2B0B6C25005FD99C /* Backup Status */ = {
+		B8475DFC2B0B6C25005FD99C /* BackupStatus */ = {
 			isa = PBXGroup;
 			children = (
-				B8475DFD2B0B6C25005FD99C /* Backup_StatusApp.swift */,
+				B8475DFD2B0B6C25005FD99C /* BackupStatusApp.swift */,
 				B8475DFF2B0B6C25005FD99C /* ContentView.swift */,
 				B8475E012B0B6C26005FD99C /* Assets.xcassets */,
-				B8475E062B0B6C26005FD99C /* Backup_Status.entitlements */,
+				B8475E062B0B6C26005FD99C /* BackupStatus.entitlements */,
 				B8475E032B0B6C26005FD99C /* Preview Content */,
 			);
-			path = "Backup Status";
+			path = BackupStatus;
 			sourceTree = "<group>";
 		};
 		B8475E032B0B6C26005FD99C /* Preview Content */ = {
@@ -69,9 +134,35 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		B884DDDB2B0B6C6900EA00B3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B884DDDC2B0B6C6900EA00B3 /* WidgetKit.framework */,
+				B884DDDE2B0B6C6900EA00B3 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		B843A4672B0B6E1800BE2277 /* Backup Status Widget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B843A4792B0B6E1900BE2277 /* Build configuration list for PBXNativeTarget "Backup Status Widget" */;
+			buildPhases = (
+				B843A4642B0B6E1800BE2277 /* Sources */,
+				B843A4652B0B6E1800BE2277 /* Frameworks */,
+				B843A4662B0B6E1800BE2277 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Backup Status Widget";
+			productName = BackupStatusWidgetExtension;
+			productReference = B843A4682B0B6E1800BE2277 /* Backup Status Widget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		B8475DF92B0B6C25005FD99C /* Backup Status */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B8475E092B0B6C26005FD99C /* Build configuration list for PBXNativeTarget "Backup Status" */;
@@ -79,10 +170,12 @@
 				B8475DF62B0B6C25005FD99C /* Sources */,
 				B8475DF72B0B6C25005FD99C /* Frameworks */,
 				B8475DF82B0B6C25005FD99C /* Resources */,
+				B884DDEE2B0B6C6A00EA00B3 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				B843A4772B0B6E1900BE2277 /* PBXTargetDependency */,
 			);
 			name = "Backup Status";
 			productName = "Backup Status";
@@ -99,12 +192,15 @@
 				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
+					B843A4672B0B6E1800BE2277 = {
+						CreatedOnToolsVersion = 15.0.1;
+					};
 					B8475DF92B0B6C25005FD99C = {
 						CreatedOnToolsVersion = 15.0.1;
 					};
 				};
 			};
-			buildConfigurationList = B8475DF52B0B6C25005FD99C /* Build configuration list for PBXProject "Backup Status" */;
+			buildConfigurationList = B8475DF52B0B6C25005FD99C /* Build configuration list for PBXProject "BackupStatus" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -118,11 +214,20 @@
 			projectRoot = "";
 			targets = (
 				B8475DF92B0B6C25005FD99C /* Backup Status */,
+				B843A4672B0B6E1800BE2277 /* Backup Status Widget */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		B843A4662B0B6E1800BE2277 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B843A4732B0B6E1900BE2277 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B8475DF82B0B6C25005FD99C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -135,18 +240,92 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		B843A4642B0B6E1800BE2277 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B843A46D2B0B6E1800BE2277 /* BackupStatusWidgetBundle.swift in Sources */,
+				B843A46F2B0B6E1800BE2277 /* BackupStatusWidget.swift in Sources */,
+				B843A4712B0B6E1800BE2277 /* AppIntent.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B8475DF62B0B6C25005FD99C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				B8475E002B0B6C25005FD99C /* ContentView.swift in Sources */,
-				B8475DFE2B0B6C25005FD99C /* Backup_StatusApp.swift in Sources */,
+				B8475DFE2B0B6C25005FD99C /* BackupStatusApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		B843A4772B0B6E1900BE2277 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B843A4672B0B6E1800BE2277 /* Backup Status Widget */;
+			targetProxy = B843A4762B0B6E1900BE2277 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		B843A47A2B0B6E1900BE2277 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = BackupStatusWidget/BackupStatusWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = DNG6HL3Y5G;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BackupStatusWidget/Info.plist;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "nl.nielsmouthaan.backup-status.widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		B843A47B2B0B6E1900BE2277 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = BackupStatusWidget/BackupStatusWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = DNG6HL3Y5G;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BackupStatusWidget/Info.plist;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "nl.nielsmouthaan.backup-status.widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		B8475E072B0B6C26005FD99C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -268,13 +447,14 @@
 		B8475E0A2B0B6C26005FD99C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Backup Status/Backup_Status.entitlements";
+				CODE_SIGN_ENTITLEMENTS = BackupStatus/BackupStatus.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Backup Status/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"BackupStatus/Preview Content\"";
 				DEVELOPMENT_TEAM = DNG6HL3Y5G;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -285,7 +465,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "nl.nielsmouthaan.Backup-Status";
+				PRODUCT_BUNDLE_IDENTIFIER = "nl.nielsmouthaan.backup-status";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -295,13 +475,14 @@
 		B8475E0B2B0B6C26005FD99C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Backup Status/Backup_Status.entitlements";
+				CODE_SIGN_ENTITLEMENTS = BackupStatus/BackupStatus.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Backup Status/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"BackupStatus/Preview Content\"";
 				DEVELOPMENT_TEAM = DNG6HL3Y5G;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -312,7 +493,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "nl.nielsmouthaan.Backup-Status";
+				PRODUCT_BUNDLE_IDENTIFIER = "nl.nielsmouthaan.backup-status";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -322,7 +503,16 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B8475DF52B0B6C25005FD99C /* Build configuration list for PBXProject "Backup Status" */ = {
+		B843A4792B0B6E1900BE2277 /* Build configuration list for PBXNativeTarget "Backup Status Widget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B843A47A2B0B6E1900BE2277 /* Debug */,
+				B843A47B2B0B6E1900BE2277 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B8475DF52B0B6C25005FD99C /* Build configuration list for PBXProject "BackupStatus" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B8475E072B0B6C26005FD99C /* Debug */,
