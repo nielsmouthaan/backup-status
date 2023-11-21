@@ -14,6 +14,9 @@
 		B843A4712B0B6E1800BE2277 /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B843A4702B0B6E1800BE2277 /* AppIntent.swift */; };
 		B843A4732B0B6E1900BE2277 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B843A4722B0B6E1900BE2277 /* Assets.xcassets */; };
 		B843A4782B0B6E1900BE2277 /* Backup Status Widget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B843A4682B0B6E1800BE2277 /* Backup Status Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B843A4842B0B7A9500BE2277 /* PreferenceFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B843A4832B0B7A9500BE2277 /* PreferenceFile.swift */; };
+		B843A4862B0CAD1B00BE2277 /* StartAtLaunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B843A4852B0CAD1B00BE2277 /* StartAtLaunch.swift */; };
+		B843A4882B0CAEB200BE2277 /* Logger+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B843A4872B0CAEB200BE2277 /* Logger+Extensions.swift */; };
 		B8475DFE2B0B6C25005FD99C /* BackupStatusApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8475DFD2B0B6C25005FD99C /* BackupStatusApp.swift */; };
 		B8475E002B0B6C25005FD99C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8475DFF2B0B6C25005FD99C /* ContentView.swift */; };
 		B8475E022B0B6C26005FD99C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8475E012B0B6C26005FD99C /* Assets.xcassets */; };
@@ -52,6 +55,9 @@
 		B843A4722B0B6E1900BE2277 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B843A4742B0B6E1900BE2277 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B843A4752B0B6E1900BE2277 /* BackupStatusWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BackupStatusWidget.entitlements; sourceTree = "<group>"; };
+		B843A4832B0B7A9500BE2277 /* PreferenceFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceFile.swift; sourceTree = "<group>"; };
+		B843A4852B0CAD1B00BE2277 /* StartAtLaunch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartAtLaunch.swift; sourceTree = "<group>"; };
+		B843A4872B0CAEB200BE2277 /* Logger+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Logger+Extensions.swift"; sourceTree = "<group>"; };
 		B8475DFA2B0B6C25005FD99C /* Backup Status.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Backup Status.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8475DFD2B0B6C25005FD99C /* BackupStatusApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupStatusApp.swift; sourceTree = "<group>"; };
 		B8475DFF2B0B6C25005FD99C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -119,6 +125,9 @@
 			children = (
 				B8475DFD2B0B6C25005FD99C /* BackupStatusApp.swift */,
 				B8475DFF2B0B6C25005FD99C /* ContentView.swift */,
+				B843A4832B0B7A9500BE2277 /* PreferenceFile.swift */,
+				B843A4852B0CAD1B00BE2277 /* StartAtLaunch.swift */,
+				B843A4872B0CAEB200BE2277 /* Logger+Extensions.swift */,
 				B8475E012B0B6C26005FD99C /* Assets.xcassets */,
 				B8475E062B0B6C26005FD99C /* BackupStatus.entitlements */,
 				B8475E032B0B6C26005FD99C /* Preview Content */,
@@ -178,6 +187,8 @@
 				B843A4772B0B6E1900BE2277 /* PBXTargetDependency */,
 			);
 			name = "Backup Status";
+			packageProductDependencies = (
+			);
 			productName = "Backup Status";
 			productReference = B8475DFA2B0B6C25005FD99C /* Backup Status.app */;
 			productType = "com.apple.product-type.application";
@@ -209,6 +220,8 @@
 				Base,
 			);
 			mainGroup = B8475DF12B0B6C25005FD99C;
+			packageReferences = (
+			);
 			productRefGroup = B8475DFB2B0B6C25005FD99C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -256,6 +269,9 @@
 			files = (
 				B8475E002B0B6C25005FD99C /* ContentView.swift in Sources */,
 				B8475DFE2B0B6C25005FD99C /* BackupStatusApp.swift in Sources */,
+				B843A4842B0B7A9500BE2277 /* PreferenceFile.swift in Sources */,
+				B843A4882B0CAEB200BE2277 /* Logger+Extensions.swift in Sources */,
+				B843A4862B0CAD1B00BE2277 /* StartAtLaunch.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -459,6 +475,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -487,6 +504,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
