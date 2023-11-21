@@ -20,55 +20,45 @@ struct Preferences: Codable {
     
     struct Destination: Codable {
         
-        enum Result: Codable {
-            case OK
-            case Other
-        }
+        let id: String
+        let isEncrypted: Bool
+        let isNetwork: Bool
+        let bytesAvailable: Int64
+        let bytesUsed: Int64
+        let volumeName: String
+        let snapshots: [Date]
         
-        let isEncrypted: Bool?
-        let isNetwork: Bool?
-        let bytesAvailable: Int?
-        let bytesUsed: Int?
-        let volumeName: String?
-        let snapshots: [Date]?
-        let attempts: [Date]?
-        let result: Result?
-        
-        fileprivate init(isEncrypted: Bool? = nil, isNetwork: Bool? = nil, bytesAvailable: Int? = nil, bytesUsed: Int? = nil, volumeName: String? = nil, snapshots: [Date]? = nil, attempts: [Date]? = nil, result: Preferences.Destination.Result? = nil) {
+        fileprivate init(id: String, isEncrypted: Bool, isNetwork: Bool, bytesAvailable: Int64, bytesUsed: Int64, volumeName: String, snapshots: [Date]) {
+            self.id = id
             self.isEncrypted = isEncrypted
             self.isNetwork = isNetwork
             self.bytesAvailable = bytesAvailable
             self.bytesUsed = bytesUsed
             self.volumeName = volumeName
             self.snapshots = snapshots
-            self.attempts = attempts
-            self.result = result
         }
         
         init(_ dictionary: [String: Any]) {
+            self.id = dictionary["DestinationID"] as? String ?? ""
             self.isEncrypted = dictionary["LastKnownEncryptionState"] as? String == "Encrypted"
             self.isNetwork = dictionary["NetworkURL"] != nil
-            self.bytesAvailable = dictionary["BytesAvailable"] as? Int
-            self.bytesUsed = dictionary["BytesUsed"] as? Int
-            self.volumeName = dictionary["LastKnownVolumeName"] as? String
-            self.snapshots = dictionary["SnapshotDates"] as? [Date]
-            self.attempts = dictionary["AttemptDates"] as? [Date]
-            if let result = dictionary["RESULT"] as? Int {
-                if result == 0 {
-                    self.result = .OK
-                } else {
-                    self.result = .Other
-                }
-            } else {
-                self.result = nil
-            }
+            self.bytesAvailable = dictionary["BytesAvailable"] as? Int64 ?? 0
+            self.bytesUsed = dictionary["BytesUsed"] as? Int64 ?? 0
+            self.volumeName = dictionary["LastKnownVolumeName"] as? String ?? ""
+            self.snapshots = dictionary["SnapshotDates"] as? [Date] ?? []
+        }
+        
+        var lastBackup: Date? {
+            snapshots.max() ?? nil
         }
     }
     
-    var destinations: [Destination]?
+    var destinations: [Destination]
+    var lastDestination: Destination?
     
-    fileprivate init(destinations: [Preferences.Destination]? = nil) {
+    fileprivate init(destinations: [Destination], lastDestination: Destination?) {
         self.destinations = destinations
+        self.lastDestination = lastDestination
     }
     
     init?(url: URL) {
@@ -84,6 +74,9 @@ struct Preferences: Codable {
                     return nil
                 }
                 self.destinations = destinationsData.compactMap { Destination($0) }
+                if let lastDestinationId = plist["LastDestinationID"] as? String {
+                    self.lastDestination = self.destinations.filter { $0.id == lastDestinationId }.first
+                }
             } catch {
                 Logger.app.error("Failed reading content from preferences file: \(error)")
                 return nil
@@ -126,17 +119,11 @@ struct Preferences: Codable {
     
     static var demo: Preferences {
         let snapshots = [
-            Date(timeIntervalSinceNow: -30 * 60),
-            Date(timeIntervalSinceNow: -90 * 60),
-            Date(timeIntervalSinceNow: -150 * 60),
+            Date(timeIntervalSinceNow: (-130 * 60) + 31),
+            Date(timeIntervalSinceNow: (-590 * 60) + 15),
+            Date(timeIntervalSinceNow: (-150 * 60) + 18),
         ]
-        let attempts = [
-            Date(timeIntervalSinceNow: -3 * 60),
-            Date(timeIntervalSinceNow: -35 * 60),
-            Date(timeIntervalSinceNow: -120 * 60),
-            Date(timeIntervalSinceNow: -180 * 60),
-        ]
-        let destination = Destination(isEncrypted: true, isNetwork: false, bytesAvailable: 1311960657920, bytesUsed: 454036393984, volumeName: "Time Machine", snapshots: snapshots, attempts: attempts, result: .OK)
-        return Preferences(destinations: [destination])
+        let destination = Destination(id: "0F051871-0C44-4856-83C6-4852661B2BF7", isEncrypted: true, isNetwork: false, bytesAvailable: 1311960657920, bytesUsed: 454036393984, volumeName: "Time Machine", snapshots: snapshots)
+        return Preferences(destinations: [destination], lastDestination: destination)
     }
 }
