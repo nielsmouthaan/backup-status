@@ -10,11 +10,6 @@ import OSLog
 import AppKit
 import UniformTypeIdentifiers
 
-private extension UserDefaults {
-    
-    static let shared = UserDefaults(suiteName: "nl.nielsmouthaan.backup-status.shared")!
-}
-
 private extension NSNotification.Name {
     
     static let fileChangedNotification = NSNotification.Name("fileChanged")
@@ -35,9 +30,9 @@ class PreferencesFile: ObservableObject {
     private var stream: FSEventStreamRef?
     private var lastChange: Date?
     
-    @Published var accessibleURL: URL? {
+    @Published var url: URL? {
         didSet {
-            if accessibleURL != nil {
+            if url != nil {
                 process()
                 startObservingForChanges()
             } else {
@@ -50,13 +45,13 @@ class PreferencesFile: ObservableObject {
         if let bookmarkData = UserDefaults.shared.data(forKey: .bookmarkDataKey) {
             do {
                 var isStale = false // Seems to work better when ignored.
-                accessibleURL = try URL(resolvingBookmarkData: bookmarkData, options: .withSecurityScope, relativeTo: nil, bookmarkDataIsStale: &isStale)
-                Logger.main.info("Bookmark data resolved")
+                url = try URL(resolvingBookmarkData: bookmarkData, options: .withSecurityScope, relativeTo: nil, bookmarkDataIsStale: &isStale)
             } catch {
-                Logger.main.error("Unable to resolve bookmark: \(error)")
+                Preferences.clear()
+                Logger.app.error("Unable to resolve bookmark: \(error)")
             }
         } else {
-            Logger.main.info("Bookmark data not available in user defaults")
+            Logger.app.info("Bookmark data not available in user defaults")
         }
         NotificationCenter.default.addObserver(self, selector: #selector(handleFileChangedNotification), name: .fileChangedNotification, object: nil)
     }
@@ -78,15 +73,20 @@ class PreferencesFile: ObservableObject {
         panel.allowedContentTypes = [UTType(filenameExtension: "plist")!]
         panel.begin(completionHandler: { result in
             if result == .OK, let url = panel.url {
-                if self.isValid() {
+                if Preferences(url: url) != nil {
                     if self.bookmark(url: url) {
-                        self.accessibleURL = url
+                        self.url = url
                     }
                 } else {
-                    #warning("TODO: Show alert")
+                    let alert = NSAlert()
+                    alert.messageText = "Incorrect file"
+                    alert.informativeText = "Select \(URL.preferencesFile.lastPathComponent) from the displayed directory."
+                    alert.alertStyle = .warning
+                    alert.addButton(withTitle: "OK")
+                    alert.runModal()
                 }
             } else {
-                Logger.main.warning("Preferences file was not selected")
+                Logger.app.warning("Preferences file was not selected")
             }
         })
     }
@@ -97,13 +97,14 @@ class PreferencesFile: ObservableObject {
             UserDefaults.shared.set(data, forKey: .bookmarkDataKey)
             return true
         } catch {
-            Logger.main.error("Unable to bookmark URL: \(error)")
+            Logger.app.error("Unable to bookmark URL: \(error)")
+            Preferences.clear()
             return false
         }
     }
     
     private func startObservingForChanges() {
-        guard let accessibleURL else {
+        guard let url else {
             fatalError("Preferences file is not accessible")
         }
         var context = FSEventStreamContext(version: 0, info: nil, retain: nil, release: nil, copyDescription: nil)
@@ -111,7 +112,7 @@ class PreferencesFile: ObservableObject {
             nil,
             eventCallback,
             &context,
-            [accessibleURL.path] as CFArray,
+            [url.path] as CFArray,
             FSEventsGetCurrentEventId(),
             0,
             FSEventStreamCreateFlags(kFSEventStreamCreateFlagUseCFTypes | kFSEventStreamCreateFlagFileEvents)
@@ -133,14 +134,13 @@ class PreferencesFile: ObservableObject {
             lastChange = Date()
         } else if Date().timeIntervalSince(lastChange!) > 1 { // Prevents multiple triggers caused by the same change.
             lastChange = Date()
-            Logger.main.info("Preferences file has changed")
             process()
         }
     }
     
     private let eventCallback: FSEventStreamCallback = { (stream, contextInfo, numEvents, eventPaths, eventFlags, eventIds) in
         guard let paths = unsafeBitCast(eventPaths, to: NSArray.self) as? [String] else {
-            fatalError("Error while parsing paths")
+            fatalError("Failed parsing paths")
         }
         if !paths.filter({ $0 == URL.preferencesFile.path }).isEmpty {
             DispatchQueue.main.async {
@@ -149,22 +149,16 @@ class PreferencesFile: ObservableObject {
         }
     }
     
-    private func isValid() -> Bool {
-        guard let accessibleURL else {
-            return false
-        }
-        return Preferences(url: accessibleURL) != nil
-    }
-    
     private func process() {
-        guard let accessibleURL else {
+        guard let url else {
             fatalError("Preferences file is not accessible")
         }
-        guard let preferences = Preferences(url: accessibleURL) else {
-            #warning("TODO: Store error so widget can display it")
+        guard let preferences = Preferences(url: url) else {
+            Preferences.clear()
             return
         }
-        
-        print(preferences)
+        if !preferences.store() {
+            Preferences.clear()
+        }
     }
 }

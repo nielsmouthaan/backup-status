@@ -1,6 +1,6 @@
 //
 //  BackupStatusWidgetBundle.swift
-//  BackupStatusWidget
+//  Backup Status Widget
 //
 //  Created by Niels Mouthaan on 20/11/2023.
 //

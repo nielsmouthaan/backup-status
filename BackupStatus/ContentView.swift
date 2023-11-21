@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import LaunchAtLogin
 
 struct ContentView: View {
     
@@ -32,9 +31,9 @@ struct ContentView: View {
                 Button("Grant permission") {
                     preferenceFile.grantAccess()
                 }
-                .disabled(preferenceFile.accessibleURL != nil)
+                .disabled(preferenceFile.url != nil)
             }
-            .opacity(preferenceFile.accessibleURL != nil ? 0.5 : 1)
+            .opacity(preferenceFile.url != nil ? 0.5 : 1)
             .padding(.bottom)
             VStack {
                 Text("2. Start at launch")

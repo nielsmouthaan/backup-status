@@ -20,7 +20,7 @@ class StartAtLaunch: ObservableObject {
                    try SMAppService.mainApp.unregister()
                }
            } catch {
-               Logger.main.error("Failed to \(self.enabled ? "enable" : "disable") start at launch: \(error.localizedDescription)")
+               Logger.app.error("Failed to \(self.enabled ? "enable" : "disable") start at launch: \(error)")
            }
        }
    }
