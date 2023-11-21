@@ -11,7 +11,7 @@ import LaunchAtLogin
 struct ContentView: View {
     
     @StateObject private var startAtLaunch = StartAtLaunch()
-    @EnvironmentObject private var preferenceFile: PreferenceFile
+    @EnvironmentObject private var preferenceFile: PreferencesFile
     
     var body: some View {
         VStack {
@@ -28,7 +28,7 @@ struct ContentView: View {
                 Text("1. Grant permission")
                     .font(.title)
                     .padding(.bottom, 3)
-                Text("Backup Status requires read-only access to your Time Machine configuration in order to determine its status. Click *Grant Permission* and select *\(preferenceFile.path.lastPathComponent)* from the displayed directory.")
+                Text("Backup Status requires read-only access to your Time Machine configuration in order to determine its status. Click *Grant Permission* and select *\(URL.preferencesFile.lastPathComponent)* from the displayed directory.")
                 Button("Grant permission") {
                     preferenceFile.grantAccess()
                 }

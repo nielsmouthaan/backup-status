@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct BackupStatusApp: App {
     
-    @StateObject private var preferenceFile = PreferenceFile()
+    @StateObject private var preferenceFile = PreferencesFile()
     
     var body: some Scene {
         WindowGroup {
