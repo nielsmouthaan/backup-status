@@ -23,11 +23,13 @@
 		B843A4992B0CEA5A00BE2277 /* Logger+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B843A4872B0CAEB200BE2277 /* Logger+Extensions.swift */; };
 		B843A49A2B0CEA6400BE2277 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B843A48D2B0CDC0C00BE2277 /* UserDefaults+Extensions.swift */; };
 		B843A4A02B0CEE1100BE2277 /* WidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B843A49E2B0CEE0700BE2277 /* WidgetView.swift */; };
-		B843A4A22B0CEE2600BE2277 /* WidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B843A49E2B0CEE0700BE2277 /* WidgetView.swift */; };
 		B8475DFE2B0B6C25005FD99C /* BackupStatusApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8475DFD2B0B6C25005FD99C /* BackupStatusApp.swift */; };
 		B8475E002B0B6C25005FD99C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8475DFF2B0B6C25005FD99C /* ContentView.swift */; };
 		B8475E022B0B6C26005FD99C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8475E012B0B6C26005FD99C /* Assets.xcassets */; };
 		B8475E052B0B6C26005FD99C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8475E042B0B6C26005FD99C /* Preview Assets.xcassets */; };
+		B8DC70992B0E04D0002834C8 /* WidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B843A49E2B0CEE0700BE2277 /* WidgetView.swift */; };
+		B8DC709C2B0E105B002834C8 /* DiskUsageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DC709B2B0E1058002834C8 /* DiskUsageView.swift */; };
+		B8DC709D2B0E105B002834C8 /* DiskUsageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DC709B2B0E1058002834C8 /* DiskUsageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +78,7 @@
 		B8475E062B0B6C26005FD99C /* BackupStatus.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BackupStatus.entitlements; sourceTree = "<group>"; };
 		B884DDDC2B0B6C6900EA00B3 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		B884DDDE2B0B6C6900EA00B3 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		B8DC709B2B0E1058002834C8 /* DiskUsageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskUsageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +108,7 @@
 				B843A46E2B0B6E1800BE2277 /* BackupStatusWidget.swift */,
 				B843A4702B0B6E1800BE2277 /* AppIntent.swift */,
 				B843A49E2B0CEE0700BE2277 /* WidgetView.swift */,
+				B8DC709B2B0E1058002834C8 /* DiskUsageView.swift */,
 				B843A4722B0B6E1900BE2277 /* Assets.xcassets */,
 				B843A4742B0B6E1900BE2277 /* Info.plist */,
 				B843A4752B0B6E1900BE2277 /* BackupStatusWidget.entitlements */,
@@ -272,6 +276,7 @@
 			files = (
 				B843A46D2B0B6E1800BE2277 /* BackupStatusWidgetBundle.swift in Sources */,
 				B843A4992B0CEA5A00BE2277 /* Logger+Extensions.swift in Sources */,
+				B8DC709C2B0E105B002834C8 /* DiskUsageView.swift in Sources */,
 				B843A4A02B0CEE1100BE2277 /* WidgetView.swift in Sources */,
 				B843A46F2B0B6E1800BE2277 /* BackupStatusWidget.swift in Sources */,
 				B843A4982B0CEA1100BE2277 /* Preferences.swift in Sources */,
@@ -286,10 +291,11 @@
 			files = (
 				B8475E002B0B6C25005FD99C /* ContentView.swift in Sources */,
 				B8475DFE2B0B6C25005FD99C /* BackupStatusApp.swift in Sources */,
-				B843A4A22B0CEE2600BE2277 /* WidgetView.swift in Sources */,
 				B843A48A2B0CC38700BE2277 /* Preferences.swift in Sources */,
 				B843A4842B0B7A9500BE2277 /* PreferencesFile.swift in Sources */,
+				B8DC709D2B0E105B002834C8 /* DiskUsageView.swift in Sources */,
 				B843A48E2B0CDC0C00BE2277 /* UserDefaults+Extensions.swift in Sources */,
+				B8DC70992B0E04D0002834C8 /* WidgetView.swift in Sources */,
 				B843A4882B0CAEB200BE2277 /* Logger+Extensions.swift in Sources */,
 				B843A4862B0CAD1B00BE2277 /* StartAtLaunch.swift in Sources */,
 			);

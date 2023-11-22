@@ -7,13 +7,12 @@
 
 import SwiftUI
 
-private extension Color {
-    static let darkGreen = Color(red: 0.0, green: 0.5, blue: 0.0)
-}
-
 struct WidgetView: View {
     
-    @State var preferences: Preferences?
+    var preferences = Preferences.load()
+    @Environment(\.widgetRenderingMode) private var renderingMode
+    @Environment(\.widgetFamily) var widgetFamily
+    @State private var textWidth: CGFloat = 0
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -25,29 +24,43 @@ struct WidgetView: View {
                     Text("Last Backup")
                         .textCase(.uppercase)
                         .font(.subheadline)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(.tertiary)
                     HStack(spacing: 0) {
-                        if let lastBackup = destination.lastBackup {
-                            Text(lastBackup, format:.relative(presentation: .numeric, unitsStyle: .wide))
-                                .foregroundStyle(.green)
+                        if destination.isBackingUp {
+                            HStack(spacing: 0) {
+                                Text("Backing up")
+                            }
                         } else {
-                            #warning("TODO: No backups")
+                            if let lastBackup = destination.lastBackup {
+                                Text(formattedDate(lastBackup))
+                            } else {
+                                Text("No backup made")
+                                    .foregroundStyle(renderingMode == .vibrant ? .primary : Color.red)
+                            }
                         }
                     }
                         .font(.title3)
+                        .bold()
                     Spacer()
-                    ProgressView(value: Double(destination.bytesUsed), total: Double(destination.bytesAvailable + destination.bytesUsed))
-                        .progressViewStyle(LinearProgressViewStyle())
-                        .tint(.green)
-                    #warning("TODO: Dynamic color")
-                    HStack {
-                        Text("\(formatBytes(8002555904)) of \(formatBytes(8002555904 + 22773600256))")
-                            .textCase(.uppercase)
-                        Spacer()
-                        Image(systemName: destination.isEncrypted ? "lock" : "lock.open")
-                        Image(systemName: destination.isNetwork ? "network" : "network.slash")
+                    DiskUsageView(used: destination.bytesUsed, available: destination.bytesAvailable)
+                    HStack(spacing: 0) {
+                        Text(formatBytes(destination.bytesUsed))
+                        Text(widgetFamily == .systemSmall ? " / " : " of ")
+                            .foregroundStyle(.tertiary)
+                        Text(formatBytes(destination.bytesUsed + destination.bytesAvailable))
+                        if widgetFamily != .systemSmall {
+                            Text(" available")
+                                .foregroundStyle(.tertiary)
+                        }
+                        if widgetFamily != .systemSmall {
+                            Spacer()
+                            Image(systemName: destination.isEncrypted ? "lock" : "lock.open")
+                            Text(" ")
+                            Image(systemName: destination.isNetwork ? "network" : "network.slash")
+                        }
                     }
                         .font(.footnote)
+                        .foregroundStyle(.secondary)
                 } else {
                     
                 }
@@ -66,11 +79,39 @@ struct WidgetView: View {
         .frame(maxWidth: .infinity)
     }
     
-    func formatBytes(_ bytes: Int64) -> String {
+    private func formatBytes(_ bytes: Int64) -> String {
         let formatter = ByteCountFormatter()
         formatter.allowedUnits = [.useBytes, .useKB, .useMB, .useGB, .useTB]
         formatter.countStyle = .file
         return formatter.string(fromByteCount: bytes)
+    }
+    
+    private func colorForDate(_ date: Date) -> Color {
+        if Date().timeIntervalSince(date) < (24 * 60 * 60) {
+            return .primary
+        } else if Date().timeIntervalSince(date) < (3 * 24 * 60 * 60) {
+            return .orange
+        } else {
+            return .red
+        }
+    }
+    
+    private func formattedDate(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        if widgetFamily == .systemSmall {
+            if Calendar.current.isDateInToday(date) {
+                formatter.dateStyle = .none
+                formatter.timeStyle = .short
+            } else {
+                formatter.dateStyle = .none
+                formatter.timeStyle = .short
+            }
+        } else {
+            formatter.dateStyle = .short
+            formatter.timeStyle = .short
+        }
+        formatter.doesRelativeDateFormatting = true
+        return formatter.string(from: date)
     }
 }
 
@@ -78,14 +119,22 @@ struct WidgetView: View {
     Group {
         VStack {
             Group {
-                WidgetView(preferences: nil)
-                    .frame(width: 165, height: 165)
-                WidgetView(preferences: nil)
-                    .frame(width: 345, height: 165)
-                WidgetView(preferences: nil)
-                    .frame(width: 345, height: 345)
+                VStack {
+                    WidgetView(preferences: nil)
+                        .padding()
+                }
+                .frame(width: 165, height: 165)
+                VStack {
+                    WidgetView(preferences: nil)
+                        .padding()
+                }
+                .frame(width: 345, height: 165)
+                VStack {
+                    WidgetView(preferences: nil)
+                        .padding()
+                }
+                .frame(width: 345, height: 345)
             }
-            .padding()
             .background(.white)
             .cornerRadius(25)
         }
@@ -97,14 +146,22 @@ struct WidgetView: View {
     Group {
         VStack {
             Group {
-                WidgetView(preferences: Preferences.demo)
-                    .frame(width: 165, height: 165)
-                WidgetView(preferences: Preferences.demo)
-                    .frame(width: 345, height: 165)
-                WidgetView(preferences: Preferences.demo)
-                    .frame(width: 345, height: 345)
+                VStack {
+                    WidgetView(preferences: Preferences.demo)
+                        .padding()
+                }
+                .frame(width: 165, height: 165)
+                VStack {
+                    WidgetView(preferences: Preferences.demo)
+                        .padding()
+                }
+                .frame(width: 345, height: 165)
+                VStack {
+                    WidgetView(preferences: Preferences.demo)
+                        .padding()
+                }
+                .frame(width: 345, height: 345)
             }
-            .padding()
             .background(.white)
             .cornerRadius(25)
         }

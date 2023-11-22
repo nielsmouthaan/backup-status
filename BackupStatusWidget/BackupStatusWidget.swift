@@ -12,27 +12,27 @@ import OSLog
 struct Provider: AppIntentTimelineProvider {
     
     func placeholder(in context: Context) -> SimpleEntry {
-        let preferences = Preferences.load() ?? .demo
-        return SimpleEntry(date: Date(), configuration: ConfigurationAppIntent(), preferences: preferences)
+        return SimpleEntry(date: Date(), configuration: ConfigurationAppIntent())
     }
 
     func snapshot(for configuration: ConfigurationAppIntent, in context: Context) async -> SimpleEntry {
-        let preferences = Preferences.load() ?? .demo
-        return SimpleEntry(date: Date(), configuration: configuration, preferences: preferences)
+        return SimpleEntry(date: Date(), configuration: configuration)
     }
     
     func timeline(for configuration: ConfigurationAppIntent, in context: Context) async -> Timeline<SimpleEntry> {
-        let preferences = Preferences.load()
-        let entry = SimpleEntry(date: Date(), configuration: configuration, preferences: preferences)
         Logger.app.info("Timeline requested")
-        return Timeline(entries: [entry], policy: .never)
+        let nowEntry = SimpleEntry(date: Date(), configuration: configuration)
+        let startOfTomorrow = Calendar.current.startOfDay(for: Calendar.current.date(byAdding: .day, value: 1, to: Date())!) // Needed to update relative date formatting.
+        let startOfTomorrowEntry = SimpleEntry(date: startOfTomorrow, configuration: configuration)
+        let startOfDayAfterTomorrow = Calendar.current.startOfDay(for: Calendar.current.date(byAdding: .day, value: 1, to: Date())!)
+        let startOfDayAfterTomorrowEntry = SimpleEntry(date: startOfDayAfterTomorrow, configuration: configuration)
+        return Timeline(entries: [nowEntry, startOfTomorrowEntry, startOfDayAfterTomorrowEntry], policy: .after(startOfDayAfterTomorrow))
     }
 }
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
     let configuration: ConfigurationAppIntent
-    let preferences: Preferences?
 }
 
 struct BackupStatusWidgetEntryView : View {
@@ -41,7 +41,7 @@ struct BackupStatusWidgetEntryView : View {
     
     var body: some View {
         VStack {
-            WidgetView(preferences: entry.preferences)
+            WidgetView()
         }
     }
 }
