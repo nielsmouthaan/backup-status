@@ -149,7 +149,7 @@ class PreferencesFile: ObservableObject {
         }
     }
     
-    private func process() {
+    func process() {
         guard let url else {
             fatalError("Preferences file is not accessible")
         }

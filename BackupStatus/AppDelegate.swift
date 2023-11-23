@@ -1,0 +1,56 @@
+//
+//  AppDelegate.swift
+//  BackupStatus
+//
+//  Created by Niels Mouthaan on 23/11/2023.
+//
+
+import Cocoa
+import SwiftUI
+
+@main
+class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
+    
+    var preferenceFile = PreferencesFile()
+    var window: NSWindow?
+    
+    func applicationDidFinishLaunching(_ notification: Notification) {
+        if !launchedAsLogInItem {
+            showWindow()
+        }
+    }
+    
+    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows: Bool) -> Bool {
+        if !hasVisibleWindows {
+            showWindow()
+        }
+        if preferenceFile.url != nil {
+            preferenceFile.process()
+        }
+        return true
+    }
+    
+    private func showWindow() {
+        if window == nil {
+            window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: .appWidth, height: .appHeight), styleMask: [.titled, .closable, .miniaturizable], backing: .buffered, defer: false)
+            window!.center()
+            window!.isReleasedWhenClosed = false
+            window!.title = "Backup Status"
+            window!.contentView = NSHostingView(rootView: AppView(preferenceFile: preferenceFile))
+            window!.delegate = self
+        }
+        window!.makeKeyAndOrderFront(nil)
+    }
+    
+    private var launchedAsLogInItem: Bool {
+        guard let event = NSAppleEventManager.shared().currentAppleEvent else { return false }
+        return event.eventID == kAEOpenApplication && event.paramDescriptor(forKeyword: keyAEPropData)?.enumCodeValue == keyAELaunchedAsLogInItem
+    }
+    
+    func windowWillClose(_ notification: Notification) {
+        if preferenceFile.url == nil || !StartAtLaunch().enabled {
+            NSApplication.shared.terminate(self)
+        }
+    }
+}
+

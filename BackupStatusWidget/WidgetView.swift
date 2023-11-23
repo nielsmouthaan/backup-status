@@ -9,7 +9,7 @@ import SwiftUI
 
 struct WidgetView: View {
     
-    var preferences = Preferences.load()
+    var preferences: Preferences?
     @Environment(\.widgetRenderingMode) private var renderingMode
     @Environment(\.widgetFamily) var widgetFamily
     @State private var textWidth: CGFloat = 0
@@ -25,16 +25,17 @@ struct WidgetView: View {
                         .textCase(.uppercase)
                         .font(.subheadline)
                         .foregroundStyle(.tertiary)
-                    HStack(spacing: 0) {
+                    HStack {
                         if let lastBackup = destination.lastBackup {
                             Text(formattedDate(lastBackup))
+                                .bold()
                         } else {
                             Text("No backup made")
                                 .foregroundStyle(renderingMode == .vibrant ? .primary : Color.red)
+                                .bold()
                         }
                     }
                         .font(.title3)
-                        .bold()
                     Spacer()
                     DiskUsageView(used: destination.bytesUsed, available: destination.bytesAvailable)
                     HStack(spacing: 0) {

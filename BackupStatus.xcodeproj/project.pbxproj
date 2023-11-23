@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B826B8DE2B0F749B009C6A6F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B826B8DB2B0F741A009C6A6F /* AppDelegate.swift */; };
+		B826B8DF2B0F74A2009C6A6F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B826B8DD2B0F745B009C6A6F /* Main.storyboard */; };
 		B843A4692B0B6E1800BE2277 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B884DDDC2B0B6C6900EA00B3 /* WidgetKit.framework */; };
 		B843A46A2B0B6E1800BE2277 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B884DDDE2B0B6C6900EA00B3 /* SwiftUI.framework */; };
 		B843A46D2B0B6E1800BE2277 /* BackupStatusWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B843A46C2B0B6E1800BE2277 /* BackupStatusWidgetBundle.swift */; };
@@ -23,8 +25,7 @@
 		B843A4992B0CEA5A00BE2277 /* Logger+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B843A4872B0CAEB200BE2277 /* Logger+Extensions.swift */; };
 		B843A49A2B0CEA6400BE2277 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B843A48D2B0CDC0C00BE2277 /* UserDefaults+Extensions.swift */; };
 		B843A4A02B0CEE1100BE2277 /* WidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B843A49E2B0CEE0700BE2277 /* WidgetView.swift */; };
-		B8475DFE2B0B6C25005FD99C /* BackupStatusApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8475DFD2B0B6C25005FD99C /* BackupStatusApp.swift */; };
-		B8475E002B0B6C25005FD99C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8475DFF2B0B6C25005FD99C /* ContentView.swift */; };
+		B8475E002B0B6C25005FD99C /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8475DFF2B0B6C25005FD99C /* AppView.swift */; };
 		B8475E022B0B6C26005FD99C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8475E012B0B6C26005FD99C /* Assets.xcassets */; };
 		B8475E052B0B6C26005FD99C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8475E042B0B6C26005FD99C /* Preview Assets.xcassets */; };
 		B8DC70992B0E04D0002834C8 /* WidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B843A49E2B0CEE0700BE2277 /* WidgetView.swift */; };
@@ -57,6 +58,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B826B8DB2B0F741A009C6A6F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B826B8DD2B0F745B009C6A6F /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		B843A4682B0B6E1800BE2277 /* Backup Status Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Backup Status Widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B843A46C2B0B6E1800BE2277 /* BackupStatusWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupStatusWidgetBundle.swift; sourceTree = "<group>"; };
 		B843A46E2B0B6E1800BE2277 /* BackupStatusWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupStatusWidget.swift; sourceTree = "<group>"; };
@@ -71,8 +74,7 @@
 		B843A48D2B0CDC0C00BE2277 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
 		B843A49E2B0CEE0700BE2277 /* WidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetView.swift; sourceTree = "<group>"; };
 		B8475DFA2B0B6C25005FD99C /* Backup Status.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Backup Status.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B8475DFD2B0B6C25005FD99C /* BackupStatusApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupStatusApp.swift; sourceTree = "<group>"; };
-		B8475DFF2B0B6C25005FD99C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B8475DFF2B0B6C25005FD99C /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		B8475E012B0B6C26005FD99C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B8475E042B0B6C26005FD99C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B8475E062B0B6C26005FD99C /* BackupStatus.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BackupStatus.entitlements; sourceTree = "<group>"; };
@@ -138,8 +140,8 @@
 		B8475DFC2B0B6C25005FD99C /* BackupStatus */ = {
 			isa = PBXGroup;
 			children = (
-				B8475DFD2B0B6C25005FD99C /* BackupStatusApp.swift */,
-				B8475DFF2B0B6C25005FD99C /* ContentView.swift */,
+				B826B8DB2B0F741A009C6A6F /* AppDelegate.swift */,
+				B8475DFF2B0B6C25005FD99C /* AppView.swift */,
 				B843A4852B0CAD1B00BE2277 /* StartAtLaunch.swift */,
 				B843A4832B0B7A9500BE2277 /* PreferencesFile.swift */,
 				B843A4892B0CC38700BE2277 /* Preferences.swift */,
@@ -147,6 +149,7 @@
 				B843A48D2B0CDC0C00BE2277 /* UserDefaults+Extensions.swift */,
 				B8475E012B0B6C26005FD99C /* Assets.xcassets */,
 				B8475E062B0B6C26005FD99C /* BackupStatus.entitlements */,
+				B826B8DD2B0F745B009C6A6F /* Main.storyboard */,
 				B8475E032B0B6C26005FD99C /* Preview Content */,
 			);
 			path = BackupStatus;
@@ -262,6 +265,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B826B8DF2B0F74A2009C6A6F /* Main.storyboard in Resources */,
 				B8475E052B0B6C26005FD99C /* Preview Assets.xcassets in Resources */,
 				B8475E022B0B6C26005FD99C /* Assets.xcassets in Resources */,
 			);
@@ -289,10 +293,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B8475E002B0B6C25005FD99C /* ContentView.swift in Sources */,
-				B8475DFE2B0B6C25005FD99C /* BackupStatusApp.swift in Sources */,
+				B8475E002B0B6C25005FD99C /* AppView.swift in Sources */,
 				B843A48A2B0CC38700BE2277 /* Preferences.swift in Sources */,
 				B843A4842B0B7A9500BE2277 /* PreferencesFile.swift in Sources */,
+				B826B8DE2B0F749B009C6A6F /* AppDelegate.swift in Sources */,
 				B8DC709D2B0E105B002834C8 /* DiskUsageView.swift in Sources */,
 				B843A48E2B0CDC0C00BE2277 /* UserDefaults+Extensions.swift in Sources */,
 				B8DC70992B0E04D0002834C8 /* WidgetView.swift in Sources */,
@@ -503,6 +507,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -532,6 +537,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",

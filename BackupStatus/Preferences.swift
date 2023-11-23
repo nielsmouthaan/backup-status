@@ -104,10 +104,14 @@ struct Preferences: Codable {
     static func load() -> Preferences? {
         if let data = UserDefaults.shared.data(forKey: .preferencesKey) {
             do {
-                return try JSONDecoder().decode(Preferences.self, from: data)
+                let preferences = try JSONDecoder().decode(Preferences.self, from: data)
+                Logger.app.info("Preferences loaded")
+                return preferences
             } catch {
-                print("Failed loading preferences: \(error)")
+                Logger.app.error("Failed loading preferences: \(error)")
             }
+        } else {
+            Logger.app.info("Preferences not available")
         }
         return nil
     }
@@ -123,13 +127,6 @@ struct Preferences: Codable {
             Date(timeIntervalSinceNow: (-590 * 60) + 15),
             Date(timeIntervalSinceNow: (-150 * 60) + 18),
         ]
-        let attempts = [
-            Date(timeIntervalSinceNow: (-4 * 60) + 25),
-            Date(timeIntervalSinceNow: (-140 * 60) + 15),
-            Date(timeIntervalSinceNow: (-595 * 60) + 48),
-            Date(timeIntervalSinceNow: (-159 * 60) + 1),
-        ]
-
         let destination = Destination(id: "0F051871-0C44-4856-83C6-4852661B2BF7", isEncrypted: true, isNetwork: false, bytesAvailable: 1311960657920, bytesUsed: 454036393984, volumeName: "Time Machine", snapshots: snapshots)
         return Preferences(destinations: [destination], lastDestination: destination)
     }

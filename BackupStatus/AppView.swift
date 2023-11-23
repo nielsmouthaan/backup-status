@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  AppView.swift
 //  Backup Status
 //
 //  Created by Niels Mouthaan on 20/11/2023.
@@ -7,10 +7,15 @@
 
 import SwiftUI
 
-struct ContentView: View {
+extension CGFloat {
+    static var appWidth = 480.0
+    static var appHeight = 520.0
+}
+
+struct AppView: View {
     
     @StateObject private var startAtLaunch = StartAtLaunch()
-    @EnvironmentObject private var preferenceFile: PreferencesFile
+    @ObservedObject var preferenceFile: PreferencesFile
     
     var body: some View {
         VStack {
@@ -55,13 +60,23 @@ struct ContentView: View {
                 Link("View instructions", destination: URL(string: "https://support.apple.com/guide/mac-help/add-and-customize-widgets-mchl52be5da5/mac")!)
             }
             .padding(.bottom)
-            
+            Spacer()
+            HStack {
+                Text("Made by [Niels Mouthaan](http://x.com/nielsmouthaan)")
+                Text("—")
+                Button("Quit & uninstall") {
+                    #warning("TODO: Go uninstall instructions")
+                    NSApplication.shared.terminate(self)
+                }
+                    .buttonStyle(.link)
+            }
+            .font(.footnote)
         }
         .padding()
-        .frame(width: 480, height: 520)
+        .frame(width: .appWidth , height: .appHeight)
     }
 }
 
 #Preview {
-    ContentView()
+    AppView(preferenceFile: PreferencesFile())
 }
