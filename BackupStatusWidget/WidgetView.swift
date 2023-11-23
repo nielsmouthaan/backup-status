@@ -26,17 +26,11 @@ struct WidgetView: View {
                         .font(.subheadline)
                         .foregroundStyle(.tertiary)
                     HStack(spacing: 0) {
-                        if destination.isBackingUp {
-                            HStack(spacing: 0) {
-                                Text("Backing up")
-                            }
+                        if let lastBackup = destination.lastBackup {
+                            Text(formattedDate(lastBackup))
                         } else {
-                            if let lastBackup = destination.lastBackup {
-                                Text(formattedDate(lastBackup))
-                            } else {
-                                Text("No backup made")
-                                    .foregroundStyle(renderingMode == .vibrant ? .primary : Color.red)
-                            }
+                            Text("No backup made")
+                                .foregroundStyle(renderingMode == .vibrant ? .primary : Color.red)
                         }
                     }
                         .font(.title3)
@@ -103,8 +97,8 @@ struct WidgetView: View {
                 formatter.dateStyle = .none
                 formatter.timeStyle = .short
             } else {
-                formatter.dateStyle = .none
-                formatter.timeStyle = .short
+                formatter.dateStyle = .short
+                formatter.timeStyle = .none
             }
         } else {
             formatter.dateStyle = .short

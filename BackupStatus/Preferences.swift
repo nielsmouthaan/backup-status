@@ -20,13 +20,6 @@ struct Preferences: Codable {
     
     struct Destination: Codable {
         
-        enum Result: Codable {
-            case OK
-            case Other
-            //case Delayed (104)
-            //case Copying (22)
-        }
-        
         let id: String
         let isEncrypted: Bool
         let isNetwork: Bool
@@ -34,10 +27,8 @@ struct Preferences: Codable {
         let bytesUsed: Int64
         let volumeName: String
         let snapshots: [Date]
-        let attempts: [Date]
-        let result: Result
         
-        fileprivate init(id: String, isEncrypted: Bool, isNetwork: Bool, bytesAvailable: Int64, bytesUsed: Int64, volumeName: String, snapshots: [Date], attempts: [Date], result: Result) {
+        fileprivate init(id: String, isEncrypted: Bool, isNetwork: Bool, bytesAvailable: Int64, bytesUsed: Int64, volumeName: String, snapshots: [Date]) {
             self.id = id
             self.isEncrypted = isEncrypted
             self.isNetwork = isNetwork
@@ -45,8 +36,6 @@ struct Preferences: Codable {
             self.bytesUsed = bytesUsed
             self.volumeName = volumeName
             self.snapshots = snapshots
-            self.attempts = attempts
-            self.result = result
         }
         
         init(_ dictionary: [String: Any]) {
@@ -57,25 +46,10 @@ struct Preferences: Codable {
             self.bytesUsed = dictionary["BytesUsed"] as? Int64 ?? 0
             self.volumeName = dictionary["LastKnownVolumeName"] as? String ?? ""
             self.snapshots = dictionary["SnapshotDates"] as? [Date] ?? []
-            self.attempts = dictionary["AttemptDates"] as? [Date] ?? []
-            if (dictionary["RESULT"] as? Int) == 0 {
-                self.result = .OK
-            } else {
-                self.result = .Other
-            }
         }
         
         var lastBackup: Date? {
             snapshots.max() ?? nil
-        }
-        
-        var isBackingUp: Bool {
-            if let latestAttempt = attempts.max(), let latestSnapshot = snapshots.max() {
-                if latestAttempt > latestSnapshot && result == .OK {
-                    return true
-                }
-            }
-            return false
         }
     }
     
@@ -156,7 +130,7 @@ struct Preferences: Codable {
             Date(timeIntervalSinceNow: (-159 * 60) + 1),
         ]
 
-        let destination = Destination(id: "0F051871-0C44-4856-83C6-4852661B2BF7", isEncrypted: true, isNetwork: false, bytesAvailable: 1311960657920, bytesUsed: 454036393984, volumeName: "Time Machine", snapshots: snapshots, attempts: attempts, result: .OK)
+        let destination = Destination(id: "0F051871-0C44-4856-83C6-4852661B2BF7", isEncrypted: true, isNetwork: false, bytesAvailable: 1311960657920, bytesUsed: 454036393984, volumeName: "Time Machine", snapshots: snapshots)
         return Preferences(destinations: [destination], lastDestination: destination)
     }
 }
