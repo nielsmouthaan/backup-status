@@ -9,7 +9,7 @@ import SwiftUI
 
 struct WidgetView: View {
     
-    var preferences = Preferences.load()
+    var preferences: Preferences?
     @Environment(\.widgetRenderingMode) private var renderingMode
     @Environment(\.widgetFamily) var widgetFamily
     @State private var textWidth: CGFloat = 0
