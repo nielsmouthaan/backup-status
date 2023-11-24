@@ -6,13 +6,15 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 struct WidgetView: View {
     
     var preferences: Preferences?
     @Environment(\.widgetRenderingMode) private var renderingMode
-    @Environment(\.widgetFamily) var widgetFamily
+    @Environment(\.widgetFamily) private var widgetFamily
     @State private var textWidth: CGFloat = 0
+    var widgetFamilyForPreviewing: WidgetFamily? = nil
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -20,34 +22,41 @@ struct WidgetView: View {
                 if let destination = preferences.lastDestination {
                     Text(destination.volumeName)
                         .font(.title2)
-                    .padding(.bottom)
-                    Text("Last Backup")
-                        .textCase(.uppercase)
-                        .font(.subheadline)
-                        .foregroundStyle(.tertiary)
-                    HStack {
-                        if let lastBackup = destination.lastBackup {
-                            Text(formattedDate(lastBackup))
+                        .padding(.bottom)
+                    VStack(alignment: .leading, spacing: 3) {
+                        Text(widgetFamilyForRendering == .systemLarge ? "Last backups" : "Last backup")
+                            .textCase(.uppercase)
+                            .font(.subheadline)
+                            .foregroundStyle(.tertiary)
+                        if destination.snapshots.isEmpty {
+                            Text(widgetFamilyForRendering == .systemLarge ? "No backups made" : "No backup made")
+                                .foregroundStyle(renderingMode == .vibrant ? .primary : Color.red)
                                 .bold()
                         } else {
-                            Text("No backup made")
-                                .foregroundStyle(renderingMode == .vibrant ? .primary : Color.red)
+                            Group {
+                                if widgetFamilyForRendering == .systemLarge {
+                                    ForEach(destination.snapshots.sorted().reversed().prefix(11), id: \.self) { snapshot in
+                                        Text(formattedDate(snapshot))
+                                    }
+                                } else {
+                                    Text(formattedDate(destination.lastSnapshot!))
+                                }
+                            }
                                 .bold()
                         }
                     }
-                        .font(.title3)
                     Spacer()
                     DiskUsageView(used: destination.bytesUsed, available: destination.bytesAvailable)
                     HStack(spacing: 0) {
                         Text(formatBytes(destination.bytesUsed))
-                        Text(widgetFamily == .systemSmall ? " / " : " of ")
+                        Text(widgetFamilyForRendering == .systemSmall ? " / " : " of ")
                             .foregroundStyle(.tertiary)
                         Text(formatBytes(destination.bytesUsed + destination.bytesAvailable))
-                        if widgetFamily != .systemSmall {
+                        if widgetFamilyForRendering != .systemSmall {
                             Text(" available")
                                 .foregroundStyle(.tertiary)
                         }
-                        if widgetFamily != .systemSmall {
+                        if widgetFamilyForRendering != .systemSmall {
                             Spacer()
                             Image(systemName: destination.isEncrypted ? "lock" : "lock.open")
                             Text(" ")
@@ -93,7 +102,7 @@ struct WidgetView: View {
     
     private func formattedDate(_ date: Date) -> String {
         let formatter = DateFormatter()
-        if widgetFamily == .systemSmall {
+        if widgetFamilyForRendering == .systemSmall {
             if Calendar.current.isDateInToday(date) {
                 formatter.dateStyle = .none
                 formatter.timeStyle = .short
@@ -108,6 +117,14 @@ struct WidgetView: View {
         formatter.doesRelativeDateFormatting = true
         return formatter.string(from: date)
     }
+    
+    private var widgetFamilyForRendering: WidgetFamily {
+        if let widgetFamilyForPreviewing {
+            return widgetFamilyForPreviewing
+        } else {
+            return widgetFamily
+        }
+    }
 }
 
 #Preview("Not Configured") {
@@ -115,17 +132,17 @@ struct WidgetView: View {
         VStack {
             Group {
                 VStack {
-                    WidgetView(preferences: nil)
+                    WidgetView(preferences: nil, widgetFamilyForPreviewing: .systemSmall)
                         .padding()
                 }
                 .frame(width: 165, height: 165)
                 VStack {
-                    WidgetView(preferences: nil)
+                    WidgetView(preferences: nil, widgetFamilyForPreviewing: .systemMedium)
                         .padding()
                 }
                 .frame(width: 345, height: 165)
                 VStack {
-                    WidgetView(preferences: nil)
+                    WidgetView(preferences: nil, widgetFamilyForPreviewing: .systemSmall)
                         .padding()
                 }
                 .frame(width: 345, height: 345)
@@ -142,17 +159,17 @@ struct WidgetView: View {
         VStack {
             Group {
                 VStack {
-                    WidgetView(preferences: Preferences.demo)
+                    WidgetView(preferences: Preferences.demo, widgetFamilyForPreviewing: .systemSmall)
                         .padding()
                 }
                 .frame(width: 165, height: 165)
                 VStack {
-                    WidgetView(preferences: Preferences.demo)
+                    WidgetView(preferences: Preferences.demo, widgetFamilyForPreviewing: .systemMedium)
                         .padding()
                 }
                 .frame(width: 345, height: 165)
                 VStack {
-                    WidgetView(preferences: Preferences.demo)
+                    WidgetView(preferences: Preferences.demo, widgetFamilyForPreviewing: .systemLarge)
                         .padding()
                 }
                 .frame(width: 345, height: 345)
