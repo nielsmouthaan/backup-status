@@ -23,21 +23,27 @@ struct WidgetView: View {
                     Text(destination.volumeName)
                         .font(.title2)
                         .padding(.bottom)
+                        .minimumScaleFactor(0.7)
+                        .lineLimit(1)
                     VStack(alignment: .leading, spacing: 3) {
                         Text(widgetFamilyForRendering == .systemLarge ? "Last backups" : "Last backup")
                             .textCase(.uppercase)
                             .font(.subheadline)
                             .foregroundStyle(.tertiary)
                         if destination.snapshots.isEmpty {
-                            Text(widgetFamilyForRendering == .systemLarge ? "No backups made" : "No backup made")
-                                .foregroundStyle(renderingMode == .vibrant ? .primary : Color.red)
-                                .bold()
+                            HStack {
+                                Text(widgetFamilyForRendering == .systemLarge ? "No backups" : "No backup")
+                                    .fontWeight(.semibold)
+                                Image(systemName: renderingMode == .vibrant ? "exclamationmark.triangle" : "exclamationmark.triangle.fill")
+                                    .foregroundStyle(renderingMode == .vibrant ? .primary : Color(.red))
+                            }
                         } else {
                             Group {
                                 if widgetFamilyForRendering == .systemLarge {
                                     ForEach(Array(destination.snapshots.sorted().reversed().prefix(11).enumerated()), id: \.element) { index, element in
                                         HStack {
                                             Text(formattedDate(element))
+                                                .fontWeight(index == 0 ? .semibold : .regular)
                                             if index == 0, let color = warningIndicatorColor(destination: destination) {
                                                 Image(systemName: renderingMode == .vibrant ? "exclamationmark.triangle" : "exclamationmark.triangle.fill")
                                                     .foregroundStyle(renderingMode == .vibrant ? .primary : color)
@@ -47,6 +53,7 @@ struct WidgetView: View {
                                 } else {
                                     HStack {
                                         Text(formattedDate(destination.lastSnapshot!))
+                                            .fontWeight(.semibold)
                                         if let color = warningIndicatorColor(destination: destination) {
                                             Image(systemName: renderingMode == .vibrant ? "exclamationmark.triangle" : "exclamationmark.triangle.fill")
                                                 .foregroundStyle(renderingMode == .vibrant ? .primary : color)
@@ -54,7 +61,6 @@ struct WidgetView: View {
                                     }
                                 }
                             }
-                                .bold()
                         }
                     }
                     Spacer()
@@ -84,7 +90,7 @@ struct WidgetView: View {
                 VStack {
                     Text("Not Set Up")
                         .font(.title3)
-                        .bold()
+                        .fontWeight(.semibold)
                         .padding(.bottom, 5)
                     Text("Run the app **Backup Status** to set up this widget.")
                 }
@@ -141,7 +147,7 @@ struct WidgetView: View {
     }
 }
 
-#Preview("Not Configured") {
+#Preview("Not Set Up") {
     Group {
         VStack {
             Group {
