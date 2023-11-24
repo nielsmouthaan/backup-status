@@ -13,5 +13,5 @@ struct ConfigurationAppIntent: WidgetConfigurationIntent {
     static var title: LocalizedStringResource = "Backup Status"
     static var description = IntentDescription("Shows the status of your Time Machine backups.")
 
-    @Parameter(title: "Volume") var destination: Preferences.Destination?
+    @Parameter(title: "Backup Disk") var destination: Preferences.Destination?
 }
