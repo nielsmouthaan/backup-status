@@ -35,11 +35,23 @@ struct WidgetView: View {
                         } else {
                             Group {
                                 if widgetFamilyForRendering == .systemLarge {
-                                    ForEach(destination.snapshots.sorted().reversed().prefix(11), id: \.self) { snapshot in
-                                        Text(formattedDate(snapshot))
+                                    ForEach(Array(destination.snapshots.sorted().reversed().prefix(11).enumerated()), id: \.element) { index, element in
+                                        HStack {
+                                            Text(formattedDate(element))
+                                            if index == 0, let color = warningIndicatorColor(destination: destination) {
+                                                Image(systemName: renderingMode == .vibrant ? "exclamationmark.triangle" : "exclamationmark.triangle.fill")
+                                                    .foregroundStyle(renderingMode == .vibrant ? .primary : color)
+                                            }
+                                        }
                                     }
                                 } else {
-                                    Text(formattedDate(destination.lastSnapshot!))
+                                    HStack {
+                                        Text(formattedDate(destination.lastSnapshot!))
+                                        if let color = warningIndicatorColor(destination: destination) {
+                                            Image(systemName: renderingMode == .vibrant ? "exclamationmark.triangle" : "exclamationmark.triangle.fill")
+                                                .foregroundStyle(renderingMode == .vibrant ? .primary : color)
+                                        }
+                                    }
                                 }
                             }
                                 .bold()
@@ -90,14 +102,16 @@ struct WidgetView: View {
         return formatter.string(fromByteCount: bytes)
     }
     
-    private func colorForDate(_ date: Date) -> Color {
-        if Date().timeIntervalSince(date) < (24 * 60 * 60) {
-            return .primary
-        } else if Date().timeIntervalSince(date) < (3 * 24 * 60 * 60) {
-            return .orange
-        } else {
-            return .red
+    
+    private func warningIndicatorColor(destination: Preferences.Destination) -> Color? {
+        if let lastSnapshot = destination.lastSnapshot {
+            if Date().timeIntervalSince(lastSnapshot) > (3 * 24 * 60 * 60) {
+                return .red
+            } else if Date().timeIntervalSince(lastSnapshot) > (24 * 60 * 60) {
+                return .orange
+            }
         }
+        return nil
     }
     
     private func formattedDate(_ date: Date) -> String {

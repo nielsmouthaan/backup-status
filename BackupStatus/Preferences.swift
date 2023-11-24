@@ -122,33 +122,12 @@ struct Preferences: Codable {
     }
     
     static var demo: Preferences {
-        let snapshots = [
-            Date(timeIntervalSinceNow: (-130 * 60) + 31),
-            Date(timeIntervalSinceNow: (-590 * 60) + 15),
-            Date(timeIntervalSinceNow: (-150 * 60) + 18),
-            Date(timeIntervalSinceNow: (-904 * 60) + 27),
-            Date(timeIntervalSinceNow: (-200 * 60) + 45),
-            Date(timeIntervalSinceNow: (-360 * 60) + 10),
-            Date(timeIntervalSinceNow: (-480 * 60) + 55),
-            Date(timeIntervalSinceNow: (-720 * 60) + 30),
-            Date(timeIntervalSinceNow: (-210 * 60) + 20),
-            Date(timeIntervalSinceNow: (-320 * 60) + 40),
-            Date(timeIntervalSinceNow: (-430 * 60) + 50),
-            Date(timeIntervalSinceNow: (-540 * 60) + 60),
-            Date(timeIntervalSinceNow: (-650 * 60) + 35),
-            Date(timeIntervalSinceNow: (-760 * 60) + 45),
-            Date(timeIntervalSinceNow: (-870 * 60) + 55),
-            Date(timeIntervalSinceNow: (-980 * 60) + 25),
-            Date(timeIntervalSinceNow: (-1030 * 60) + 30),
-            Date(timeIntervalSinceNow: (-1100 * 60) + 40),
-            Date(timeIntervalSinceNow: (-1170 * 60) + 50),
-            Date(timeIntervalSinceNow: (-1240 * 60) + 60),
-            Date(timeIntervalSinceNow: (-1310 * 60) + 35),
-            Date(timeIntervalSinceNow: (-1380 * 60) + 45),
-            Date(timeIntervalSinceNow: (-1450 * 60) + 55),
-            Date(timeIntervalSinceNow: (-1520 * 60) + 25),
-            Date(timeIntervalSinceNow: (-1590 * 60) + 30)
-        ]
+        var snapshots = [Date]()
+        for i in 0..<20 {
+            if let date = Calendar.current.date(byAdding: .hour, value: -4 * i, to: Date()) {
+                snapshots.append(Calendar.current.date(byAdding: .second, value: Int.random(in: -10000..<10000), to: date)!)
+            }
+        }
         let destination = Destination(id: "0F051871-0C44-4856-83C6-4852661B2BF7", isEncrypted: true, isNetwork: false, bytesAvailable: 1311960657920, bytesUsed: 454036393984, volumeName: "Time Machine", snapshots: snapshots)
         return Preferences(destinations: [destination], lastDestination: destination)
     }
