@@ -8,6 +8,7 @@
 import Foundation
 import OSLog
 import WidgetKit
+import AppIntents
 
 extension String {
     
@@ -18,7 +19,34 @@ extension String {
 
 struct Preferences: Codable {
     
-    struct Destination: Codable {
+    struct DestinationQuery: EntityQuery {
+        
+        func entities(for identifiers: [Destination.ID]) async throws -> [Destination] {
+            if let destinations = Preferences.load()?.destinations {
+                return destinations.filter { identifiers.contains($0.id) }
+            } else {
+                return []
+            }
+        }
+        
+        func suggestedEntities() async throws -> [Destination] {
+            return Preferences.load()?.destinations ?? []
+        }
+        
+        func defaultResult() async -> Destination? {
+            return Preferences.load()?.lastDestination
+        }
+    }
+    
+    struct Destination: Codable, AppEntity {
+        
+        static var defaultQuery = DestinationQuery()
+        
+        static var typeDisplayRepresentation: TypeDisplayRepresentation = "Backup Disk"
+        
+        var displayRepresentation: DisplayRepresentation {
+            DisplayRepresentation(title: "\(volumeName)")
+        }
         
         let id: String
         let isEncrypted: Bool

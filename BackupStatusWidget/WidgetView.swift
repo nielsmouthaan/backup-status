@@ -11,6 +11,7 @@ import WidgetKit
 struct WidgetView: View {
     
     var preferences: Preferences?
+    var destination: Preferences.Destination?
     @Environment(\.widgetRenderingMode) private var renderingMode
     @Environment(\.widgetFamily) private var widgetFamily
     @State private var textWidth: CGFloat = 0
@@ -19,7 +20,7 @@ struct WidgetView: View {
     var body: some View {
         VStack(alignment: .leading) {
             if let preferences {
-                if let destination = preferences.lastDestination {
+                if let destination = destination ?? preferences.lastDestination {
                     Text(destination.volumeName)
                         .font(.title2)
                         .padding(.bottom)
@@ -84,7 +85,14 @@ struct WidgetView: View {
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                 } else {
-                    
+                    VStack {
+                        Text("No Backup Disk")
+                            .font(.title3)
+                            .fontWeight(.semibold)
+                            .padding(.bottom, 5)
+                        Text("Configure Time Machine to use this widget.")
+                    }
+                    .multilineTextAlignment(.center)
                 }
             } else {
                 VStack {

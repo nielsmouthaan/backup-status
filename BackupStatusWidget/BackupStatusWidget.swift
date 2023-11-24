@@ -45,7 +45,7 @@ struct BackupStatusWidgetEntryView : View {
     
     var body: some View {
         VStack {
-            WidgetView(preferences: entry.preferences)
+            WidgetView(preferences: entry.preferences, destination: entry.configuration.destination)
         }
     }
 }
