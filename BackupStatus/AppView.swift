@@ -23,7 +23,7 @@ struct AppView: View {
                 Text("Backup Status")
                     .font(.largeTitle)
                     .padding(.bottom, 3)
-                Text("Backup Status introduces a widget for your Mac, allowing you to monitor the status of Time Machine right from your desktop or Notification Center.")
+                Text("Backup Status introduces a widget for your Mac, allowing you to view the status of Time Machine right from your desktop or Notification Center.")
                     .padding(.bottom, 3)
                 Text("Follow the below instructions to set up Backup Status.")
             }
