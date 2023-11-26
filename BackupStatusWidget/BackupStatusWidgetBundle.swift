@@ -11,6 +11,6 @@ import SwiftUI
 @main
 struct BackupStatusWidgetBundle: WidgetBundle {
     var body: some Widget {
-        BackupStatusWidget()
+        BackupDiskStatusWidget()
     }
 }

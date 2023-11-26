@@ -1,5 +1,5 @@
 //
-//  WidgetView.swift
+//  BackupDiskStatusWidgetView.swift
 //  Backup Status
 //
 //  Created by Niels Mouthaan on 21/11/2023.
@@ -8,7 +8,7 @@
 import SwiftUI
 import WidgetKit
 
-struct WidgetView: View {
+struct BackupDiskStatusWidgetView: View {
     
     var preferences: Preferences?
     var destination: Preferences.Destination?
@@ -160,17 +160,17 @@ struct WidgetView: View {
         VStack {
             Group {
                 VStack {
-                    WidgetView(preferences: nil, widgetFamilyForPreviewing: .systemSmall)
+                    BackupDiskStatusWidgetView(preferences: nil, widgetFamilyForPreviewing: .systemSmall)
                         .padding()
                 }
                 .frame(width: 165, height: 165)
                 VStack {
-                    WidgetView(preferences: nil, widgetFamilyForPreviewing: .systemMedium)
+                    BackupDiskStatusWidgetView(preferences: nil, widgetFamilyForPreviewing: .systemMedium)
                         .padding()
                 }
                 .frame(width: 345, height: 165)
                 VStack {
-                    WidgetView(preferences: nil, widgetFamilyForPreviewing: .systemSmall)
+                    BackupDiskStatusWidgetView(preferences: nil, widgetFamilyForPreviewing: .systemSmall)
                         .padding()
                 }
                 .frame(width: 345, height: 345)
@@ -187,17 +187,17 @@ struct WidgetView: View {
         VStack {
             Group {
                 VStack {
-                    WidgetView(preferences: Preferences.demo, widgetFamilyForPreviewing: .systemSmall)
+                    BackupDiskStatusWidgetView(preferences: Preferences.demo, widgetFamilyForPreviewing: .systemSmall)
                         .padding()
                 }
                 .frame(width: 165, height: 165)
                 VStack {
-                    WidgetView(preferences: Preferences.demo, widgetFamilyForPreviewing: .systemMedium)
+                    BackupDiskStatusWidgetView(preferences: Preferences.demo, widgetFamilyForPreviewing: .systemMedium)
                         .padding()
                 }
                 .frame(width: 345, height: 165)
                 VStack {
-                    WidgetView(preferences: Preferences.demo, widgetFamilyForPreviewing: .systemLarge)
+                    BackupDiskStatusWidgetView(preferences: Preferences.demo, widgetFamilyForPreviewing: .systemLarge)
                         .padding()
                 }
                 .frame(width: 345, height: 345)
