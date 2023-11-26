@@ -32,13 +32,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     
     private func showWindow() {
         if window == nil {
-            window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: .appWidth, height: .appHeight), styleMask: [.titled, .closable, .miniaturizable], backing: .buffered, defer: false)
-            window!.center()
+            window = NSWindow(contentRect: .zero, styleMask: [.titled, .closable, .miniaturizable], backing: .buffered, defer: false)
             window!.isReleasedWhenClosed = false
             window!.title = "Backup Status"
             window!.contentView = NSHostingView(rootView: AppView(preferenceFile: preferenceFile))
             window!.delegate = self
+            window!.setContentSize(window!.contentView!.fittingSize)
         }
+        window!.center()
         window!.makeKeyAndOrderFront(nil)
     }
     
