@@ -72,7 +72,7 @@ struct BackupDiskStatusWidgetView: View {
                             .foregroundStyle(.tertiary)
                         Text(formatBytes(destination.bytesUsed + destination.bytesAvailable))
                         if widgetFamilyForRendering != .systemSmall {
-                            Text(" available")
+                            Text(" used")
                                 .foregroundStyle(.tertiary)
                         }
                         if widgetFamilyForRendering != .systemSmall {
