@@ -43,6 +43,13 @@ Backup Status is a [sandboxed](https://developer.apple.com/documentation/securit
 
 Backup Status contains an agent utility that observes changes to your Time Machine configuration and stores its status so the widget can access and display it. Without this utility running, the widget is unable to do this. To avoid starting this utility manually, allow it to start at launch.
 
+### How can I uninstall Backup Status?
+
+1. Open Backup Status from your Applications directory.
+2. Click `Quit & uninstall` at the bottom; this will stop the utility from running.
+3. [Remove](https://support.apple.com/guide/mac-help/add-and-customize-widgets-mchl52be5da5/mac) the widget from your desktop and/or Notification Center.
+4. [Remove](https://support.apple.com/en-us/102610) Backup Status by dragging it to the Trash.
+
 ## License
 
 Backup Status is available under the MIT license. See [LICENSE](https://github.com/nielsmouthaan/backup-status/blob/main/LICENSE) for more info.
