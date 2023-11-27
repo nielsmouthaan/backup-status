@@ -94,7 +94,7 @@ struct AppView: View {
                 Text("Made by [Niels Mouthaan](http://x.com/nielsmouthaan)")
                 Text("—")
                 Button("Quit & Uninstall") {
-#warning("TODO: Go uninstall instructions")
+                    NSWorkspace.shared.open(URL(string: "https://github.com/nielsmouthaan/backup-status#how-can-i-uninstall-backup-status")!)
                     NSApplication.shared.terminate(self)
                 }
                 .buttonStyle(.link)
