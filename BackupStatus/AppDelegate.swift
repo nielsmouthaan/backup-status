@@ -34,7 +34,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         if window == nil {
             window = NSWindow(contentRect: .zero, styleMask: [.titled, .closable, .miniaturizable], backing: .buffered, defer: false)
             window!.isReleasedWhenClosed = false
-            window!.level = .modalPanel
             window!.titleVisibility = .hidden
             window!.isMovableByWindowBackground = true
             window!.titlebarAppearsTransparent = true
