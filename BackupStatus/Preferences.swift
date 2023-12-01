@@ -81,7 +81,7 @@ struct Preferences: Codable {
         }
     }
     
-    var destinations: [Destination]
+    var destinations: [Destination]?
     var lastDestination: Destination?
     
     fileprivate init(destinations: [Destination], lastDestination: Destination?) {
@@ -97,13 +97,9 @@ struct Preferences: Codable {
                     Logger.app.error("Failed serializing preferences file")
                     return nil
                 }
-                guard let destinationsData = plist["Destinations"] as? [[String: Any]] else {
-                    Logger.app.error("Missing or invalid Destinations attribute in preferences file")
-                    return nil
-                }
-                self.destinations = destinationsData.compactMap { Destination($0) }
-                if let lastDestinationId = plist["LastDestinationID"] as? String {
-                    self.lastDestination = self.destinations.filter { $0.id == lastDestinationId }.first
+                self.destinations = (plist["Destinations"] as? [[String: Any]])?.compactMap{ Destination($0) }
+                if let destinations = self.destinations, let lastDestinationId = plist["LastDestinationID"] as? String {
+                    self.lastDestination = destinations.filter { $0.id == lastDestinationId }.first
                 }
             } catch {
                 Logger.app.error("Failed reading content from preferences file: \(error)")
