@@ -23,6 +23,10 @@
 
 ## Frequently asked questions
 
+### The app doesn't work on macOS 15 (Sequoia)
+
+See [this issue](https://github.com/nielsmouthaan/backup-status/issues/10). It appears to be related to a bug in macOS 15 (Sequoia). [Granting full disk access](https://support.apple.com/guide/security/controlling-app-access-to-files-secddd1d86a6/web) to Backup Status solves the issue.
+
 ### How can I get support?
 
 First, check the [frequently asked questions](https://github.com/nielsmouthaan/backup-status#frequently-asked-questions). If your question isn't answered, [create](https://github.com/nielsmouthaan/backup-status/issues/new) an issue.
