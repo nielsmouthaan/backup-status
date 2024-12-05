@@ -19,7 +19,7 @@
 
 ## Download
 
-[Get](https://nielsmouthaan.lemonsqueezy.com/buy/2c52ce4d-9500-4783-a726-cf6a8600ffa9) Backup Status via Lemon Squeezy or check out this repository and build it yourself.
+[Get Backup Status](https://nielsmouthaan.lemonsqueezy.com/buy/2c52ce4d-9500-4783-a726-cf6a8600ffa9) via Lemon Squeezy or check out this repository and build it yourself.
 
 ## Frequently asked questions
 
