@@ -106,6 +106,7 @@ struct BackupDiskStatusWidgetView: View {
             }
         }
         .fontDesign(.monospaced)
+        .foregroundStyle(.primary)
         .frame(maxWidth: .infinity)
     }
     
