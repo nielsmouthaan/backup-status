@@ -9,5 +9,7 @@ import Foundation
 
 extension UserDefaults {
     
-    static let shared = UserDefaults(suiteName: "nl.nielsmouthaan.backup-status.shared")!
+    static var shared: UserDefaults {
+        UserDefaults(suiteName: "nl.nielsmouthaan.backup-status.shared")!
+    }
 }

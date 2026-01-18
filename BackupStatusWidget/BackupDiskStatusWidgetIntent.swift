@@ -10,8 +10,8 @@ import AppIntents
 
 struct BackupDiskStatusWidgetIntent: WidgetConfigurationIntent {
     
-    static var title: LocalizedStringResource = "Backup Disk"
-    static var description = IntentDescription("View when Time Machine made backups to a selected Backup Disk.")
+    static let title: LocalizedStringResource = "Backup Disk"
+    static let description = IntentDescription("View when Time Machine made backups to a selected Backup Disk.")
 
     @Parameter(title: "Backup Disk") var destination: Preferences.Destination?
 }

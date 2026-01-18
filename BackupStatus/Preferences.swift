@@ -40,9 +40,9 @@ struct Preferences: Codable {
     
     struct Destination: Codable, AppEntity {
         
-        static var defaultQuery = DestinationQuery()
+        static let defaultQuery = DestinationQuery()
         
-        static var typeDisplayRepresentation: TypeDisplayRepresentation = "Backup Disk"
+        static let typeDisplayRepresentation: TypeDisplayRepresentation = "Backup Disk"
         
         var displayRepresentation: DisplayRepresentation {
             DisplayRepresentation(title: "\(volumeName)")

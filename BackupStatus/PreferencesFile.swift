@@ -61,6 +61,7 @@ class PreferencesFile: ObservableObject {
         NotificationCenter.default.removeObserver(self)
     }
     
+    @MainActor
     func grantAccess() {
         let panel = NSOpenPanel();
         panel.message = "Select \(URL.preferencesFile.lastPathComponent)"

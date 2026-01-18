@@ -9,6 +9,7 @@ import Cocoa
 import SwiftUI
 
 @main
+@MainActor
 class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     
     var preferenceFile = PreferencesFile()
@@ -58,4 +59,3 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         }
     }
 }
-
