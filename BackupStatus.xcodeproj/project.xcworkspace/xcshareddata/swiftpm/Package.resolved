@@ -1,0 +1,15 @@
+{
+  "originHash" : "3e3486030645aa15709896940867071059be3c8a6a8f438072c9ef1e1c2412b7",
+  "pins" : [
+    {
+      "identity" : "permissionskit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/MacPaw/PermissionsKit",
+      "state" : {
+        "branch" : "master",
+        "revision" : "527713f054cf34f1e22c663e9a5c281724247067"
+      }
+    }
+  ],
+  "version" : 3
+}

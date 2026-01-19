@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		970ECEE89DD4D20BE32702F9 /* PermissionsKit in Frameworks */ = {isa = PBXBuildFile; productRef = 72C608E1D339CB8EF4E54F7F /* PermissionsKit */; };
 		B826B8DE2B0F749B009C6A6F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B826B8DB2B0F741A009C6A6F /* AppDelegate.swift */; };
 		B826B8DF2B0F74A2009C6A6F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B826B8DD2B0F745B009C6A6F /* Main.storyboard */; };
 		B843A4692B0B6E1800BE2277 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B884DDDC2B0B6C6900EA00B3 /* WidgetKit.framework */; };
@@ -28,7 +29,6 @@
 		B8475E002B0B6C25005FD99C /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8475DFF2B0B6C25005FD99C /* AppView.swift */; };
 		B8475E022B0B6C26005FD99C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8475E012B0B6C26005FD99C /* Assets.xcassets */; };
 		B8475E052B0B6C26005FD99C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8475E042B0B6C26005FD99C /* Preview Assets.xcassets */; };
-		970ECEE89DD4D20BE32702F9 /* PermissionsKit in Frameworks */ = {isa = PBXBuildFile; productRef = 72C608E1D339CB8EF4E54F7F /* PermissionsKit */; };
 		B8DC70992B0E04D0002834C8 /* BackupDiskStatusWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B843A49E2B0CEE0700BE2277 /* BackupDiskStatusWidgetView.swift */; };
 		B8DC709C2B0E105B002834C8 /* DiskUsageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DC709B2B0E1058002834C8 /* DiskUsageView.swift */; };
 		B8DC709D2B0E105B002834C8 /* DiskUsageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DC709B2B0E1058002834C8 /* DiskUsageView.swift */; };
@@ -319,25 +319,6 @@
 		};
 /* End PBXTargetDependency section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		C3EFCC23E7F4E4F0295D6BD2 /* XCRemoteSwiftPackageReference "PermissionsKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/MacPaw/PermissionsKit";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		72C608E1D339CB8EF4E54F7F /* PermissionsKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C3EFCC23E7F4E4F0295D6BD2 /* XCRemoteSwiftPackageReference "PermissionsKit" */;
-			productName = PermissionsKit;
-		};
-/* End XCSwiftPackageProductDependency section */
-
 /* Begin XCBuildConfiguration section */
 		B843A47A2B0B6E1900BE2277 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -348,6 +329,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = DNG6HL3Y5G;
+				ENABLE_APP_SANDBOX = NO;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BackupStatusWidget/Info.plist;
@@ -375,6 +357,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = DNG6HL3Y5G;
+				ENABLE_APP_SANDBOX = NO;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BackupStatusWidget/Info.plist;
@@ -606,6 +589,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C3EFCC23E7F4E4F0295D6BD2 /* XCRemoteSwiftPackageReference "PermissionsKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MacPaw/PermissionsKit";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		72C608E1D339CB8EF4E54F7F /* PermissionsKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C3EFCC23E7F4E4F0295D6BD2 /* XCRemoteSwiftPackageReference "PermissionsKit" */;
+			productName = PermissionsKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B8475DF22B0B6C25005FD99C /* Project object */;
 }
