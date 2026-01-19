@@ -7,8 +7,7 @@
 
 import Foundation
 import OSLog
-import AppKit
-import UniformTypeIdentifiers
+import PermissionsKit
 
 private extension NSNotification.Name {
     
@@ -20,39 +19,16 @@ extension URL {
     static let preferencesFile = URL(fileURLWithPath: "/Library/Preferences/com.apple.TimeMachine.plist")
 }
 
-private extension String {
-    
-    static let bookmarkDataKey = "bookmarkData"
-}
-
 class PreferencesFile: ObservableObject {
     
     private var stream: FSEventStreamRef?
     private var lastChange: Date?
+    private let url = URL.preferencesFile
     
-    @Published var url: URL? {
-        didSet {
-            if url != nil {
-                process()
-                startObservingForChanges()
-            } else {
-                stopObservingForChanges()
-            }
-        }
-    }
+    @Published private(set) var hasAccess = false
     
     init() {
-        if let bookmarkData = UserDefaults.shared.data(forKey: .bookmarkDataKey) {
-            do {
-                var isStale = false // Seems to work better when ignored.
-                url = try URL(resolvingBookmarkData: bookmarkData, options: .withSecurityScope, relativeTo: nil, bookmarkDataIsStale: &isStale)
-            } catch {
-                Preferences.clear()
-                Logger.app.error("Unable to resolve bookmark: \(error)")
-            }
-        } else {
-            Logger.app.info("Bookmark data not available in user defaults")
-        }
+        updateAccess()
         NotificationCenter.default.addObserver(self, selector: #selector(handleFileChangedNotification), name: .fileChangedNotification, object: nil)
     }
     
@@ -61,53 +37,8 @@ class PreferencesFile: ObservableObject {
         NotificationCenter.default.removeObserver(self)
     }
     
-    @MainActor
-    func grantAccess() {
-        let panel = NSOpenPanel();
-        panel.message = "Select \(URL.preferencesFile.lastPathComponent)"
-        panel.canChooseDirectories = false;
-        panel.canChooseFiles = true;
-        panel.canCreateDirectories = false;
-        panel.allowsMultipleSelection = false;
-        panel.directoryURL = URL.preferencesFile.deletingLastPathComponent()
-        panel.allowsMultipleSelection = false
-        panel.allowedContentTypes = [UTType(filenameExtension: "plist")!]
-        panel.begin(completionHandler: { result in
-            if result == .OK, let url = panel.url {
-                if Preferences(url: url) != nil {
-                    if self.bookmark(url: url) {
-                        self.url = url
-                    }
-                } else {
-                    let alert = NSAlert()
-                    alert.messageText = "Incorrect file"
-                    alert.informativeText = "Select \(URL.preferencesFile.lastPathComponent) from the displayed directory."
-                    alert.alertStyle = .warning
-                    alert.addButton(withTitle: "OK")
-                    alert.runModal()
-                }
-            } else {
-                Logger.app.warning("Preferences file was not selected")
-            }
-        })
-    }
-    
-    private func bookmark(url: URL) -> Bool {
-        do {
-            let data = try url.bookmarkData(options: [.withSecurityScope, .securityScopeAllowOnlyReadAccess], includingResourceValuesForKeys: nil, relativeTo: nil)
-            UserDefaults.shared.set(data, forKey: .bookmarkDataKey)
-            return true
-        } catch {
-            Logger.app.error("Unable to bookmark URL: \(error)")
-            Preferences.clear()
-            return false
-        }
-    }
-    
     private func startObservingForChanges() {
-        guard let url else {
-            fatalError("Preferences file is not accessible")
-        }
+        stopObservingForChanges()
         var context = FSEventStreamContext(version: 0, info: nil, retain: nil, release: nil, copyDescription: nil)
         stream = FSEventStreamCreate(
             nil,
@@ -150,16 +81,29 @@ class PreferencesFile: ObservableObject {
         }
     }
     
-    func process() {
-        guard let url else {
-            fatalError("Preferences file is not accessible")
-        }
+    @discardableResult
+    func process() -> Bool {
         guard let preferences = Preferences(url: url) else {
             Preferences.clear()
-            return
+            return false
         }
-        if !preferences.store() {
+        if preferences.store() {
+            return true
+        }
+        Preferences.clear()
+        return false
+    }
+    
+    func updateAccess() {
+        let status = PermissionsKit.authorizationStatus(for: .fullDiskAccess)
+        let accessGranted = status == .authorized
+        hasAccess = accessGranted
+        if accessGranted {
+            _ = process()
+            startObservingForChanges()
+        } else {
             Preferences.clear()
+            stopObservingForChanges()
         }
     }
 }

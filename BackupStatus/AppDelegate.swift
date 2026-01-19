@@ -25,9 +25,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         if !hasVisibleWindows {
             showWindow()
         }
-        if preferenceFile.url != nil {
-            preferenceFile.process()
-        }
+        preferenceFile.updateAccess()
         return true
     }
     
@@ -54,7 +52,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     }
     
     func windowWillClose(_ notification: Notification) {
-        if preferenceFile.url == nil || !StartAtLaunch().enabled {
+        if !preferenceFile.hasAccess || !StartAtLaunch().enabled {
             NSApplication.shared.terminate(self)
         }
     }

@@ -90,24 +90,18 @@ struct Preferences: Codable {
     }
     
     init?(url: URL) {
-        if url.startAccessingSecurityScopedResource() {
-            do {
-                let data = try Data(contentsOf: url)
-                guard let plist = try PropertyListSerialization.propertyList(from: data, options: [], format: nil) as? [String: Any] else {
-                    Logger.app.error("Failed serializing preferences file")
-                    return nil
-                }
-                self.destinations = (plist["Destinations"] as? [[String: Any]])?.compactMap{ Destination($0) }
-                if let destinations = self.destinations, let lastDestinationId = plist["LastDestinationID"] as? String {
-                    self.lastDestination = destinations.filter { $0.id == lastDestinationId }.first
-                }
-            } catch {
-                Logger.app.error("Failed reading content from preferences file: \(error)")
+        do {
+            let data = try Data(contentsOf: url)
+            guard let plist = try PropertyListSerialization.propertyList(from: data, options: [], format: nil) as? [String: Any] else {
+                Logger.app.error("Failed serializing preferences file")
                 return nil
             }
-            url.stopAccessingSecurityScopedResource()
-        } else {
-            Logger.app.error("Failed accessing preferences file")
+            self.destinations = (plist["Destinations"] as? [[String: Any]])?.compactMap{ Destination($0) }
+            if let destinations = self.destinations, let lastDestinationId = plist["LastDestinationID"] as? String {
+                self.lastDestination = destinations.filter { $0.id == lastDestinationId }.first
+            }
+        } catch {
+            Logger.app.error("Failed reading content from preferences file: \(error)")
             return nil
         }
     }

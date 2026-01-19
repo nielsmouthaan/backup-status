@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import AppKit
+import PermissionsKit
 
 struct AppView: View {
     
@@ -33,21 +35,21 @@ struct AppView: View {
                     .frame(maxWidth: .infinity, alignment: .center)
                     .font(.title)
                     .padding(.bottom, 3)
-                Text("*Backup Status* requires read-only access to your *Time Machine* configuration in order to determine its status.")
-                Text("Click *Grant Permission* and select *\(URL.preferencesFile.lastPathComponent)* from the displayed directory.")
+                Text("*Backup Status* requires Full Disk Access to read your *Time Machine* configuration and determine its status.")
+                Text("Click *Open System Settings* and add *Backup Status* to the Full Disk Access list.")
                 Button(action: {
-                    preferenceFile.grantAccess()
+                    PermissionsKit.requestAuthorization(for: .fullDiskAccess) { _ in }
                 }) {
-                    Text("Grant Permission")
+                    Text("Open System Settings")
                         .font(.headline)
                         .padding(.horizontal, 8)
                         .padding(.vertical, 4)
                 }
                 .frame(maxWidth: .infinity, alignment: .center)
                 .padding(.top, 3)
-                .disabled(preferenceFile.url != nil)
+                .disabled(preferenceFile.hasAccess)
             }
-            .opacity(preferenceFile.url != nil ? 0.3 : 1)
+            .opacity(preferenceFile.hasAccess ? 0.3 : 1)
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.bottom)
             VStack(alignment: .leading, spacing: 8) {
@@ -106,6 +108,9 @@ struct AppView: View {
         .frame(width: 480)
         .background(.background)
         .fixedSize(horizontal: false, vertical: true)
+        .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in
+            preferenceFile.updateAccess()
+        }
     }
 }
 

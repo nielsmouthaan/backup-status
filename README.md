@@ -23,10 +23,6 @@
 
 ## Frequently asked questions
 
-### The app doesn't work on macOS 15 or later
-
-See [this issue](https://github.com/nielsmouthaan/backup-status/issues/10). It appears to be related to a bug in macOS 15 (Sequoia). [Granting full disk access](https://support.apple.com/guide/security/controlling-app-access-to-files-secddd1d86a6/web) to Backup Status solves the issue.
-
 ### How can I get support?
 
 First, check the [frequently asked questions](https://github.com/nielsmouthaan/backup-status#frequently-asked-questions). If your question isn't answered, [create](https://github.com/nielsmouthaan/backup-status/issues/new) an issue.
@@ -39,9 +35,9 @@ First, check the [frequently asked questions](https://github.com/nielsmouthaan/b
 
 Ensure Backup Status is copied into your Applications directory and run from there.
 
-### Why do I need to grant permission?
+### Why do I need to grant Full Disk Access permission?
 
-Backup Status is a [sandboxed](https://developer.apple.com/documentation/security/app_sandbox/) application ensuring your system's and data's protection. It needs your explicit permission to read your Time Machine configuration to access its status. Since this is a read-only permission, Backup Status isn't able to modify its configuration or any other file on your Mac.
+Backup Status needs Full Disk Access to read your Time Machine configuration and determine its status. You can grant this permission in System Settings under Privacy & Security > Full Disk Access.
 
 ### Why do I need Backup Status to start at launch?
 

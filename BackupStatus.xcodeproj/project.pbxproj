@@ -28,6 +28,7 @@
 		B8475E002B0B6C25005FD99C /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8475DFF2B0B6C25005FD99C /* AppView.swift */; };
 		B8475E022B0B6C26005FD99C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8475E012B0B6C26005FD99C /* Assets.xcassets */; };
 		B8475E052B0B6C26005FD99C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8475E042B0B6C26005FD99C /* Preview Assets.xcassets */; };
+		970ECEE89DD4D20BE32702F9 /* PermissionsKit in Frameworks */ = {isa = PBXBuildFile; productRef = 72C608E1D339CB8EF4E54F7F /* PermissionsKit */; };
 		B8DC70992B0E04D0002834C8 /* BackupDiskStatusWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B843A49E2B0CEE0700BE2277 /* BackupDiskStatusWidgetView.swift */; };
 		B8DC709C2B0E105B002834C8 /* DiskUsageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DC709B2B0E1058002834C8 /* DiskUsageView.swift */; };
 		B8DC709D2B0E105B002834C8 /* DiskUsageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DC709B2B0E1058002834C8 /* DiskUsageView.swift */; };
@@ -97,6 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				970ECEE89DD4D20BE32702F9 /* PermissionsKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,6 +210,7 @@
 			);
 			name = "Backup Status";
 			packageProductDependencies = (
+				72C608E1D339CB8EF4E54F7F /* PermissionsKit */,
 			);
 			productName = "Backup Status";
 			productReference = B8475DFA2B0B6C25005FD99C /* Backup Status.app */;
@@ -241,6 +244,7 @@
 			);
 			mainGroup = B8475DF12B0B6C25005FD99C;
 			packageReferences = (
+				C3EFCC23E7F4E4F0295D6BD2 /* XCRemoteSwiftPackageReference "PermissionsKit" */,
 			);
 			productRefGroup = B8475DFB2B0B6C25005FD99C /* Products */;
 			projectDirPath = "";
@@ -314,6 +318,25 @@
 			targetProxy = B843A4762B0B6E1900BE2277 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C3EFCC23E7F4E4F0295D6BD2 /* XCRemoteSwiftPackageReference "PermissionsKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MacPaw/PermissionsKit";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		72C608E1D339CB8EF4E54F7F /* PermissionsKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C3EFCC23E7F4E4F0295D6BD2 /* XCRemoteSwiftPackageReference "PermissionsKit" */;
+			productName = PermissionsKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCBuildConfiguration section */
 		B843A47A2B0B6E1900BE2277 /* Debug */ = {
