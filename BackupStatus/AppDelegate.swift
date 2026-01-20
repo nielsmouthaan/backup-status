@@ -12,10 +12,18 @@ import SwiftUI
 @MainActor
 class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     
-    var preferenceFile = PreferencesFile()
-    var window: NSWindow?
+    private var preferenceFile: PreferencesFile?
+    private var window: NSWindow?
+    
+    private var isRunningPreviews: Bool {
+        ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
+    }
     
     func applicationDidFinishLaunching(_ notification: Notification) {
+        if isRunningPreviews {
+            return
+        }
+        preferenceFile = PreferencesFile()
         if !launchedAsLogInItem {
             showWindow()
         }
@@ -25,11 +33,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         if !hasVisibleWindows {
             showWindow()
         }
-        preferenceFile.updateAccess()
+        preferenceFile?.updateAccess()
         return true
     }
     
     private func showWindow() {
+        guard let preferenceFile else {
+            return
+        }
         if window == nil {
             window = NSWindow(contentRect: .zero, styleMask: [.titled, .closable, .miniaturizable], backing: .buffered, defer: false)
             window!.isReleasedWhenClosed = false
@@ -52,7 +63,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     }
     
     func windowWillClose(_ notification: Notification) {
-        if !preferenceFile.hasAccess || !StartAtLaunch().enabled {
+        if let preferenceFile, (!preferenceFile.hasAccess || !StartAtLaunch().enabled) {
             NSApplication.shared.terminate(self)
         }
     }

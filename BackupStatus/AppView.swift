@@ -115,5 +115,5 @@ struct AppView: View {
 }
 
 #Preview {
-    AppView(preferenceFile: PreferencesFile())
+    AppView(preferenceFile: PreferencesFile(demo: true))
 }

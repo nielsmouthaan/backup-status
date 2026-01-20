@@ -21,16 +21,20 @@ extension URL {
 
 class PreferencesFile: ObservableObject {
     
+    init(demo: Bool = false) {
+        self.demo = demo
+        if !self.demo {
+            updateAccess()
+            NotificationCenter.default.addObserver(self, selector: #selector(handleFileChangedNotification), name: .fileChangedNotification, object: nil)
+        }
+    }
+    
     private var stream: FSEventStreamRef?
     private var lastChange: Date?
     private let url = URL.preferencesFile
+    var demo = false
     
     @Published private(set) var hasAccess = false
-    
-    init() {
-        updateAccess()
-        NotificationCenter.default.addObserver(self, selector: #selector(handleFileChangedNotification), name: .fileChangedNotification, object: nil)
-    }
     
     deinit {
         stopObservingForChanges()
@@ -81,25 +85,31 @@ class PreferencesFile: ObservableObject {
         }
     }
     
-    @discardableResult
-    func process() -> Bool {
+
+    func process() {
+        if demo {
+            return
+        }
         guard let preferences = Preferences(url: url) else {
             Preferences.clear()
-            return false
+            return
         }
         if preferences.store() {
-            return true
+            return
         }
         Preferences.clear()
-        return false
+        return
     }
     
     func updateAccess() {
+        if demo {
+            return
+        }
         let status = PermissionsKit.authorizationStatus(for: .fullDiskAccess)
         let accessGranted = status == .authorized
         hasAccess = accessGranted
         if accessGranted {
-            _ = process()
+            process()
             startObservingForChanges()
         } else {
             Preferences.clear()
