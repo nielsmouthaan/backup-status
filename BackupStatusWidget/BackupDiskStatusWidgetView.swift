@@ -82,8 +82,9 @@ struct BackupDiskStatusWidgetView: View {
                             Image(systemName: destination.isNetwork ? "network" : "network.slash")
                         }
                     }
-                        .font(.footnote)
-                        .foregroundStyle(.secondary)
+                    .lineLimit(1)
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
                 } else {
                     VStack {
                         Text("No Backup Disk")
@@ -170,7 +171,7 @@ struct BackupDiskStatusWidgetView: View {
                 }
                 .frame(width: 345, height: 165)
                 VStack {
-                    BackupDiskStatusWidgetView(preferences: nil, widgetFamilyForPreviewing: .systemSmall)
+                    BackupDiskStatusWidgetView(preferences: nil, widgetFamilyForPreviewing: .systemLarge)
                         .padding()
                 }
                 .frame(width: 345, height: 345)
