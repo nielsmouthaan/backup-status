@@ -176,7 +176,7 @@ struct BackupDiskStatusWidgetView: View {
                 }
                 .frame(width: 345, height: 345)
             }
-            .background(.white)
+            .background(Color(nsColor: .windowBackgroundColor))
             .cornerRadius(25)
         }
         .padding()
@@ -203,7 +203,7 @@ struct BackupDiskStatusWidgetView: View {
                 }
                 .frame(width: 345, height: 345)
             }
-            .background(.white)
+            .background(Color(nsColor: .windowBackgroundColor))
             .cornerRadius(25)
         }
         .padding()
