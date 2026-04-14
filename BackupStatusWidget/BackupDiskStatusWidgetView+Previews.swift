@@ -124,7 +124,7 @@ struct BackupDiskStatusWidgetViewPreviews: PreviewProvider {
             .padding()
         }
         .frame(width: previewSize(for: family).width, height: previewSize(for: family).height)
-        .background(.white)
+        .background(Color(nsColor: .windowBackgroundColor))
         .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
         .padding()
     }
