@@ -52,7 +52,7 @@ struct BackupDiskStatusWidget: Widget {
     var body: some WidgetConfiguration {
         AppIntentConfiguration(kind: .widgetKind, intent: BackupDiskStatusWidgetIntent.self, provider: Provider()) { entry in
             BackupDiskStatusWidgetEntryView(entry: entry)
-                .containerBackground(.fill, for: .widget)
+                .containerBackground(.fill.tertiary, for: .widget)
         }
         .configurationDisplayName("Backup Disk Status")
         .description("View when Time Machine made backups to a selected backup Disk.")
