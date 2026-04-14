@@ -32,6 +32,7 @@
 		B8DC70992B0E04D0002834C8 /* BackupDiskStatusWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B843A49E2B0CEE0700BE2277 /* BackupDiskStatusWidgetView.swift */; };
 		B8DC709C2B0E105B002834C8 /* DiskUsageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DC709B2B0E1058002834C8 /* DiskUsageView.swift */; };
 		B8DC709D2B0E105B002834C8 /* DiskUsageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DC709B2B0E1058002834C8 /* DiskUsageView.swift */; };
+		C0D2D7342DCB000100C0D234 /* BackupDiskStatusWidgetView+Previews.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D2D7332DCB000100C0D234 /* BackupDiskStatusWidgetView+Previews.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,7 @@
 		B884DDDC2B0B6C6900EA00B3 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		B884DDDE2B0B6C6900EA00B3 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		B8DC709B2B0E1058002834C8 /* DiskUsageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskUsageView.swift; sourceTree = "<group>"; };
+		C0D2D7332DCB000100C0D234 /* BackupDiskStatusWidgetView+Previews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BackupDiskStatusWidgetView+Previews.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 				B843A46E2B0B6E1800BE2277 /* BackupDiskStatusWidget.swift */,
 				B843A4702B0B6E1800BE2277 /* BackupDiskStatusWidgetIntent.swift */,
 				B843A49E2B0CEE0700BE2277 /* BackupDiskStatusWidgetView.swift */,
+				C0D2D7332DCB000100C0D234 /* BackupDiskStatusWidgetView+Previews.swift */,
 				B8DC709B2B0E1058002834C8 /* DiskUsageView.swift */,
 				B843A4722B0B6E1900BE2277 /* Assets.xcassets */,
 				B843A4742B0B6E1900BE2277 /* Info.plist */,
@@ -298,6 +301,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B8475E002B0B6C25005FD99C /* AppView.swift in Sources */,
+				C0D2D7342DCB000100C0D234 /* BackupDiskStatusWidgetView+Previews.swift in Sources */,
 				B843A48A2B0CC38700BE2277 /* Preferences.swift in Sources */,
 				B843A4842B0B7A9500BE2277 /* PreferencesFile.swift in Sources */,
 				B826B8DE2B0F749B009C6A6F /* AppDelegate.swift in Sources */,

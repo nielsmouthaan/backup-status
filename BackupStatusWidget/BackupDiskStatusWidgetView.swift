@@ -12,10 +12,9 @@ struct BackupDiskStatusWidgetView: View {
     
     var preferences: Preferences?
     var destination: Preferences.Destination?
+    var widgetFamilyOverride: WidgetFamily? = nil
     @Environment(\.widgetRenderingMode) private var renderingMode
     @Environment(\.widgetFamily) private var widgetFamily
-    @State private var textWidth: CGFloat = 0
-    var widgetFamilyForPreviewing: WidgetFamily? = nil
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -27,20 +26,20 @@ struct BackupDiskStatusWidgetView: View {
                         .minimumScaleFactor(0.7)
                         .lineLimit(1)
                     VStack(alignment: .leading, spacing: 3) {
-                        Text(widgetFamilyForRendering == .systemLarge ? "Last backups" : "Last backup")
+                        Text(renderingFamily == .systemLarge ? "Last backups" : "Last backup")
                             .textCase(.uppercase)
                             .font(.subheadline)
                             .foregroundStyle(.tertiary)
                         if destination.snapshots.isEmpty {
                             HStack {
-                                Text(widgetFamilyForRendering == .systemLarge ? "No backups" : "No backup")
+                                Text(renderingFamily == .systemLarge ? "No backups" : "No backup")
                                     .fontWeight(.semibold)
                                 Image(systemName: renderingMode == .vibrant ? "exclamationmark.triangle" : "exclamationmark.triangle.fill")
                                     .foregroundStyle(renderingMode == .vibrant ? .primary : Color(.red))
                             }
                         } else {
                             Group {
-                                if widgetFamilyForRendering == .systemLarge {
+                                if renderingFamily == .systemLarge {
                                     ForEach(Array(destination.snapshots.sorted().reversed().prefix(11).enumerated()), id: \.element) { index, element in
                                         HStack {
                                             Text(formattedDate(element))
@@ -68,14 +67,14 @@ struct BackupDiskStatusWidgetView: View {
                     DiskUsageView(used: destination.bytesUsed, available: destination.bytesAvailable)
                     HStack(spacing: 0) {
                         Text(formatBytes(destination.bytesUsed))
-                        Text(widgetFamilyForRendering == .systemSmall ? " / " : " of ")
+                        Text(renderingFamily == .systemSmall ? " / " : " of ")
                             .foregroundStyle(.tertiary)
                         Text(formatBytes(destination.bytesUsed + destination.bytesAvailable))
-                        if widgetFamilyForRendering != .systemSmall {
+                        if renderingFamily != .systemSmall {
                             Text(" used")
                                 .foregroundStyle(.tertiary)
                         }
-                        if widgetFamilyForRendering != .systemSmall {
+                        if renderingFamily != .systemSmall {
                             Spacer()
                             Image(systemName: destination.isEncrypted ? "lock" : "lock.open")
                             Text(" ")
@@ -131,7 +130,7 @@ struct BackupDiskStatusWidgetView: View {
     
     private func formattedDate(_ date: Date) -> String {
         let formatter = DateFormatter()
-        if widgetFamilyForRendering == .systemSmall {
+        if renderingFamily == .systemSmall {
             if Calendar.current.isDateInToday(date) {
                 formatter.dateStyle = .none
                 formatter.timeStyle = .short
@@ -146,66 +145,8 @@ struct BackupDiskStatusWidgetView: View {
         formatter.doesRelativeDateFormatting = true
         return formatter.string(from: date)
     }
-    
-    private var widgetFamilyForRendering: WidgetFamily {
-        if let widgetFamilyForPreviewing {
-            return widgetFamilyForPreviewing
-        } else {
-            return widgetFamily
-        }
-    }
-}
 
-#Preview("Not Set Up") {
-    Group {
-        VStack {
-            Group {
-                VStack {
-                    BackupDiskStatusWidgetView(preferences: nil, widgetFamilyForPreviewing: .systemSmall)
-                        .padding()
-                }
-                .frame(width: 165, height: 165)
-                VStack {
-                    BackupDiskStatusWidgetView(preferences: nil, widgetFamilyForPreviewing: .systemMedium)
-                        .padding()
-                }
-                .frame(width: 345, height: 165)
-                VStack {
-                    BackupDiskStatusWidgetView(preferences: nil, widgetFamilyForPreviewing: .systemLarge)
-                        .padding()
-                }
-                .frame(width: 345, height: 345)
-            }
-            .background(.white)
-            .cornerRadius(25)
-        }
-        .padding()
-    }
-}
-
-#Preview("Preferences") {
-    Group {
-        VStack {
-            Group {
-                VStack {
-                    BackupDiskStatusWidgetView(preferences: Preferences.demo, widgetFamilyForPreviewing: .systemSmall)
-                        .padding()
-                }
-                .frame(width: 165, height: 165)
-                VStack {
-                    BackupDiskStatusWidgetView(preferences: Preferences.demo, widgetFamilyForPreviewing: .systemMedium)
-                        .padding()
-                }
-                .frame(width: 345, height: 165)
-                VStack {
-                    BackupDiskStatusWidgetView(preferences: Preferences.demo, widgetFamilyForPreviewing: .systemLarge)
-                        .padding()
-                }
-                .frame(width: 345, height: 345)
-            }
-            .background(.white)
-            .cornerRadius(25)
-        }
-        .padding()
+    private var renderingFamily: WidgetFamily {
+        widgetFamilyOverride ?? widgetFamily
     }
 }

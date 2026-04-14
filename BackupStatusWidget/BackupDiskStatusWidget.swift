@@ -44,9 +44,7 @@ struct BackupDiskStatusWidgetEntryView : View {
     var entry: Provider.Entry
     
     var body: some View {
-        VStack {
-            BackupDiskStatusWidgetView(preferences: entry.preferences, destination: entry.configuration.destination)
-        }
+        BackupDiskStatusWidgetView(preferences: entry.preferences, destination: entry.configuration.destination)
     }
 }
 
